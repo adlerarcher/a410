@@ -1,34 +1,86 @@
 [
   {
-    "line": "There is no cloud.",
-    "note": "There is a building, a lot of electricity, and someone paying for both."
+    "type": "copy",
+    "text": "The answer arrives already dressed. Tone, citations, the whole performance."
   },
   {
-    "line": "It said it with confidence.",
-    "note": "That is not the same as knowing."
+    "type": "meme",
+    "top": "Said it with confidence",
+    "bottom": "Still a guess",
+    "img": "/images/memes/confidence.webp",
+    "alt": "A presenter points at a whiteboard while colleagues nod."
   },
   {
-    "line": "Explain it like I’m 10.",
-    "note": "The prompt I kept typing, now a website."
+    "type": "copy",
+    "text": "Then someone says it knows the files."
   },
   {
-    "line": "We’ll just add AI.",
-    "note": "What, to the part that was already confusing?"
+    "type": "meme",
+    "top": "It knows our files",
+    "bottom": "You handed it a PDF",
+    "img": "/images/memes/pdf.webp",
+    "alt": "Hands sliding a thick printed report across a desk toward a laptop."
   },
   {
-    "line": "Made it up. Sounded fine.",
-    "note": "Same machinery as a correct answer."
+    "type": "copy",
+    "text": "Ask for sources. Watch what comes back."
   },
   {
-    "line": "It can’t open your files.",
-    "note": "Until you hand it a way to press buttons. Then a wrong guess is a wrong action."
+    "type": "meme",
+    "top": "Find ten scholarly articles",
+    "bottom": "Make them up",
+    "img": "/images/memes/madeup.webp",
+    "alt": "A calm professional speaking from a laptop as others take notes."
   },
   {
-    "line": "One question is nothing.",
-    "note": "Everyone asking all day is a city’s worth of power."
+    "type": "copy",
+    "text": "Those two sentences feel the same. They are not."
   },
   {
-    "line": "The machines arrive fast.",
-    "note": "The power line does not."
+    "type": "meme",
+    "top": "It looked up the flight",
+    "bottom": "It booked the flight",
+    "img": "/images/memes/flight.webp",
+    "alt": "A traveler pays at an airport kiosk with a departure board behind them."
+  },
+  {
+    "type": "copy",
+    "text": "That is why the impressive demo was read-only on purpose."
+  },
+  {
+    "type": "meme",
+    "top": "Incredible demo",
+    "bottom": "Read-only on purpose",
+    "img": "/images/memes/demo.webp",
+    "alt": "People clap at a laptop demo in a glass office."
+  },
+  {
+    "type": "copy",
+    "text": "Meanwhile every strategy deck has the same slide."
+  },
+  {
+    "type": "meme",
+    "top": "The hard part",
+    "bottom": "We'll just add AI",
+    "img": "/images/memes/add-ai.webp",
+    "alt": "A hand presses a yellow sticky note onto a pile of permit folders."
+  },
+  {
+    "type": "meme",
+    "top": "The transformation budget",
+    "bottom": "The furnace is labeled AI",
+    "img": "/images/memes/money.webp",
+    "alt": "Two people feed stacks of cash into an industrial furnace."
+  },
+  {
+    "type": "copy",
+    "text": "And none of it is happening in a cloud. It is happening in a building."
+  },
+  {
+    "type": "meme",
+    "top": "There is no cloud",
+    "bottom": "There is a building and a bill",
+    "img": "/images/memes/cloud.webp",
+    "alt": "A data-center warehouse at dusk with power lines and a substation."
   }
 ]

@@ -1,0 +1,20 @@
+{
+  "number": "01",
+  "slug": "what-the-model-knows",
+  "title": "What the model knows and doesn't",
+  "blurb": "What it carries in its head, and why that is already out of date.",
+  "paras": [
+    {
+      "kid": "The model only knows what it read while it was being taught, plus whatever you paste into the conversation. It does not know your inbox, your company's records, or what a government database says today. Those things were never in the lesson, and they are not sitting in the chat unless someone puts them there.",
+      "grown": "A model's parametric knowledge is fixed at the end of training. The context window can hold user-supplied text, but neither source is a live view of private systems or current public records. Connecting the model to those sources is a separate problem from making the model better at language."
+    },
+    {
+      "kid": "People call that pile of teaching 'memory,' which is a bit grand. It is more like a book that has already been printed. You can stick a sticky note in the page (that is the chat). You cannot ask the book what happened this morning unless you go get this morning and put it on the sticky note.",
+      "grown": "Training weights are a frozen snapshot. Session context is ephemeral working memory. Neither updates itself against the world. Staleness is not a bug in the generator; it is the natural state of a file that stopped learning."
+    },
+    {
+      "kid": "That is why a fluent answer about your stuff can still be a guess. The model is good at sounding like it has been in the room. Being in the room is a different job, and the next lessons are about the ways people try to hire it for that job.",
+      "grown": "Fluency is not evidence of access. The rest of this sequence is about the distinct ways a system can be given access: retrieval of text, tool calls that run elsewhere, and the extra step of letting those calls change the world."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "number": "02",
+  "slug": "retrieval",
+  "title": "Retrieval: giving it something to read",
+  "blurb": "Search, documents, RAG. The model reads what it is handed and does not do anything.",
+  "paras": [
+    {
+      "kid": "If the printed book is stale, you can still go get a fresh page and hold it in front of the model. Search a website. Open a PDF. Pull a row from a database and paste the words in. That is retrieval. The model reads what you fetched. Then it talks.",
+      "grown": "Retrieval supplies non-parametric context: search results, documents, or database text inserted into the prompt. RAG is one pattern for doing this automatically. The model remains a reader of the supplied tokens. It has no side effects."
+    },
+    {
+      "kid": "This is easy to mix up with 'the model knows your files.' It does not. Someone, or some small program, went and got the files, turned them into words, and handed the words over. If that fetch is wrong, or old, or from the wrong folder, the model will still sound sure. It only saw what it was given.",
+      "grown": "The quality of a retrieved answer is bounded by the retrieval step: index coverage, query, ranking, permissions, and freshness. The generator cannot audit sources it was not shown. Confidence in the prose is not confidence in the fetch."
+    },
+    {
+      "kid": "Nothing in the world changes when this happens. No email is sent. No form is filed. A wrong retrieval is a wrong reading list, which can still cause trouble if you trust the summary, but it is not the same trouble as a button getting pressed.",
+      "grown": "Retrieval is read-only with respect to external systems. Harm, when it happens, is downstream of a person acting on the generated summary. That is a different risk surface from tool calls that mutate state."
+    }
+  ]
+}

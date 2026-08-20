@@ -1,22 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
-import memes from '../data/memes.json';
+import items from '../data/memes.json';
+
+type CopyBlock = { type: 'copy'; text: string };
+type MemeBlock = { type: 'meme'; top: string; bottom: string; img: string; alt: string };
+type Block = CopyBlock | MemeBlock;
+
+const feed = items as Block[];
 ---
-<Base title="Memes — AI410" description="One-liners that did more than another paragraph.">
+<Base title="Memes — AI410" description="The same distinctions as the lessons. Less patient.">
   <header class="masthead compact">
     <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Memes</p>
     <h1>Memes</h1>
-    <p class="dek">Sometimes a one-liner did more than another paragraph. These are the ones I kept. Not borrowed pictures. Just the jokes, on paper.</p>
+    <p class="dek">The same distinctions as the lessons. Less patient.</p>
   </header>
 
-  <main>
-    <div class="meme-wall">
-      {memes.map((meme, i) => (
-        <figure class={`meme meme-${(i % 4) + 1}`}>
-          <p class="meme-line">{meme.line}</p>
-          <p class="meme-note">{meme.note}</p>
+  <main class="meme-feed">
+    {feed.map((item) => (
+      item.type === 'copy' ? (
+        <p class="meme-bridge">{item.text}</p>
+      ) : (
+        <figure class="macro">
+          <div class="macro-frame">
+            <img src={item.img} alt={item.alt} width="1536" height="1024" loading="lazy" />
+            <p class="macro-cap macro-top">{item.top}</p>
+            <p class="macro-cap macro-bot">{item.bottom}</p>
+          </div>
         </figure>
-      ))}
-    </div>
+      )
+    ))}
   </main>
 </Base>

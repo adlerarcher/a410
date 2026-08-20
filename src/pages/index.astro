@@ -1,30 +1,76 @@
 ---
 import Base from '../layouts/Base.astro';
+import Doodle from '../components/Doodle.astro';
+import { SITE_DEFAULT_DESCRIPTION, SITE_HOME_TITLE } from '../data/site-meta';
+
+const modules = import.meta.glob('../data/lessons/*.json', { eager: true });
+const lessons = Object.values(modules)
+	.map((m) => m.default ?? m)
+	.sort((a, b) => a.number.localeCompare(b.number));
 ---
-<Base title="AI410 | AI, explained like you're 10">
-  <header class="masthead home-hero">
-    <div class="home-stage" aria-hidden="true">
-      <span class="orbit orbit-a"></span>
-      <span class="orbit orbit-b"></span>
-      <span class="orbit orbit-c"></span>
-      <span class="scrap scrap-num scrap-1 float-a">05</span>
-      <span class="scrap scrap-num scrap-2 float-b">06</span>
-      <span class="scrap scrap-sticky scrap-3 float-c">10</span>
-      <span class="scrap scrap-4 float-d">MCP</span>
-      <span class="scrap scrap-5 float-e">the building</span>
-      <img class="scrap scrap-stamp scrap-6 float-f" src="/images/ai410-mark.svg" alt="" width="56" height="56" />
-      <span class="doodle doodle-star">★</span>
-      <span class="doodle doodle-star doodle-star-2">★</span>
-      <svg class="doodle doodle-scribble" viewBox="0 0 120 36" fill="none">
-        <path d="M4 22c18-16 28 14 46 2 16-10 22 12 42-4 12-10 22 6 24 8" />
-      </svg>
-    </div>
-    <p class="kicker reveal">Notes</p>
-    <h1 class="reveal delay-1">AI, explained like you're <span class="flip">10</span>.</h1>
-    <p class="byline reveal delay-2">By <a href="/who/">Adler Archer</a></p>
-    <p class="dek reveal delay-3">I work around this subject and still get stuck on the jargon. I used to paste the words into a chat and ask it to explain them like I was 10. These pages are that habit, written down, with the usual terms next to the small ones.</p>
-    <p class="home-go reveal delay-4">
-      <a href="/lessons/">Lessons</a>
-    </p>
-  </header>
+<Base title={`AI410 | ${SITE_HOME_TITLE}`} description={SITE_DEFAULT_DESCRIPTION}>
+	<header class="masthead home-hero">
+		<div class="home-stage" aria-hidden="true">
+			<span class="orbit orbit-a"></span>
+			<span class="orbit orbit-b"></span>
+			<span class="orbit orbit-c"></span>
+			<span class="sci sci-walk float-a"><Doodle kind="walker" /></span>
+			<span class="sci sci-sat float-b"><Doodle kind="sat" /></span>
+			<span class="sci sci-rocket float-c"><Doodle kind="rocket" /></span>
+			<span class="sci sci-planet float-d"><Doodle kind="planet" /></span>
+			<span class="sci sci-ufo float-e"><Doodle kind="ufo" /></span>
+			<span class="scrap scrap-sticky scrap-3 float-c">10</span>
+			<span class="doodle doodle-star">★</span>
+			<span class="doodle doodle-star doodle-star-2">★</span>
+			<span class="doodle doodle-star doodle-star-3">✦</span>
+			<svg class="doodle doodle-scribble" viewBox="0 0 120 36" fill="none">
+				<path d="M4 22c18-16 28 14 46 2 16-10 22 12 42-4 12-10 22 6 24 8" />
+			</svg>
+		</div>
+
+		<div class="hero-copy">
+			<p class="kicker reveal">ai410</p>
+			<h1 class="reveal delay-1">How AI systems <span class="flip">actually work</span>.</h1>
+			<p class="byline reveal delay-2">By <a href="/who/">Adler Archer</a></p>
+			<p class="dek reveal delay-3">
+				Plain-language explanations of the parts that matter, written by someone who builds with
+				these systems in federal permitting.
+			</p>
+		</div>
+	</header>
+
+	<main class="home-start">
+		<p>
+			A model knows what it read while it was being taught, plus whatever you paste into the chat.
+			It does not know your inbox, your company's records, or what a permitting database says today.
+			Those things were never in the lesson. A fluent answer about them is still a guess.
+		</p>
+		<p>
+			If you want it to see something current, you fetch text and hand it over. Search, a document, a
+			row from a live system. That is retrieval. The model reads what it is given. Nothing is sent,
+			booked, or filed.
+		</p>
+		<p>
+			If you want it to do something, it calls a function that runs somewhere else. That is tool use.
+			A tool can look up which flights are left on Tuesday. It can also book one. Those two sentences
+			feel the same and are not. Doing things has consequences that reading does not, which is why a
+			careful demo is read-only on purpose.
+		</p>
+		<p>
+			MCP, when it shows up, is only the plug on the doing job. It is not the capability. The plug
+			does not decide read versus write. Someone has to.
+		</p>
+
+		<div class="contents">
+			{lessons.map((lesson) => (
+				<a class="entry" href={`/lessons/${lesson.slug}/`}>
+					<span class="num">{lesson.number}</span>
+					<div>
+						<h2>{lesson.title}</h2>
+						<p>{lesson.blurb}</p>
+					</div>
+				</a>
+			))}
+		</div>
+	</main>
 </Base>

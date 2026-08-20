@@ -1,0 +1,20 @@
+{
+  "number": "04",
+  "slug": "mcp",
+  "title": "MCP: the standard plug",
+  "blurb": "MCP is not the capability. It is the shape of the connector so a tool built once can work with more than one model.",
+  "paras": [
+    {
+      "kid": "Tool use existed before anyone named a standard. Each company built its own wiring: this model talks to this calendar in this special way. If you had four tools and three models, you were looking at a lot of custom cables.",
+      "grown": "Pre-standard tool use was N×M integration work. Each model client spoke a vendor-specific function-calling schema; each application exposed its own interface. Portability was expensive, so tools stayed trapped inside one product."
+    },
+    {
+      "kid": "MCP is an agreement about the shape of the plug. If your calendar, your files, and your database all offer the same kind of socket, then a program that speaks that shape can plug into any of them. You build the connector once. Other models can use it. MCP is not a product you buy. It is the shape.",
+      "grown": "The Model Context Protocol is an open standard for how clients discover and call tools and data sources. It separates tool servers from model hosts so they can be developed independently. The capability remains tool use; MCP is the transport and schema that make that capability portable."
+    },
+    {
+      "kid": "That is the whole idea, and it is a smaller idea than the ads. A good plug does not decide whether the toaster is on. It just means you did not have to invent a new plug for every kitchen. What the toaster is allowed to do is a later question.",
+      "grown": "Standardizing the connector does not settle authorization, least privilege, or whether a tool is read-only. Those are properties of the server and of the policy around it. MCP makes tools easier to attach. It does not make attachment safe."
+    }
+  ]
+}

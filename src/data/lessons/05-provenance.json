@@ -1,0 +1,20 @@
+{
+  "number": "05",
+  "slug": "provenance",
+  "title": "Provenance: retrieved, computed, generated",
+  "blurb": "Those three can share a confident tone. They are not the same kind of claim.",
+  "paras": [
+    {
+      "kid": "A model can invent a permitting timeline that sounds finished. It can also produce one where every fact traces to a named source with a time on it, and the sequence logic came from a rules file a person wrote. On the page those two timelines can look identical. They are not the same object.",
+      "grown": "Generated narrative, retrieved records, and deterministic computation can be concatenated into one fluent answer. Provenance is the discipline of tagging which spans were sampled from the model, which were fetched, and which were produced by code or rules a human authored."
+    },
+    {
+      "kid": "I keep a concrete case in my head: a real endangered animal, the Dixie Valley toad, pulled from a real federal list, versus a number a model could have made up that would have looked the same on the screen. One of those is a record. The other is a guess wearing a record's clothes.",
+      "grown": "Species status, docket numbers, and statutory citations are the kind of claim that should resolve to a primary source and a retrieval timestamp. A plausible endangered-species fact with no fetch is still a sample from the prior. The toad is useful because the true record exists in public APIs; a hallucination would have been indistinguishable without provenance."
+    },
+    {
+      "kid": "The habit is to ask, of each part: was this retrieved, was this computed, or was this generated? Those three have different failure modes and the same calm voice. If a site cannot tell you which is which, you are reading tone, not evidence.",
+      "grown": "Reliability is not uniform across an answer. Retrieval fails on index and permissions; computation fails on spec and inputs; generation fails by sampling. Interfaces that collapse the three into one bubble hide the only information that would let a reader discount the generated parts."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "number": "06",
+  "slug": "agency",
+  "title": "It looked up the flight. It booked the flight.",
+  "blurb": "Those two sentences feel the same and are not. This is where the safety conversation actually lives.",
+  "paras": [
+    {
+      "kid": "A model that can retrieve is answering questions. A model that can act is doing things. Doing things has consequences that reading does not. 'It looked up the flight' means a list came back. 'It booked the flight' means money moved, a seat is yours or someone else's, and undoing it is a customer-service problem, not a refresh.",
+      "grown": "Agency is the loop of choosing tool calls without a person in between each one. Read tools keep the system in question-answering. Write tools enter the world of side effects: payments, messages, records, physical scheduling. The utterances are similar; the liability is not."
+    },
+    {
+      "kid": "Most confusion is treating memory, retrieval, and action as one pile called 'the AI can use my stuff.' They are three jobs. MCP, if it is in the picture, is only the plug on the action job. The plug does not decide read versus write. Someone has to.",
+      "grown": "Collapsing parametric knowledge, RAG, and tool use into a single 'connected model' story makes policy impossible. Authorization belongs on each tool. A read-only demo is a deliberate limit on agency, not a shy version of the same product."
+    },
+    {
+      "kid": "That is why a careful demo is read-only on purpose. Not because looking things up is unimpressive. Because the interesting failure is no longer a wrong sentence. It is a wrong action, and you want to see the looking-up part clearly before you hand over the pen.",
+      "grown": "The safety conversation that matters for tool-using systems is least privilege, human confirmation on irreversible calls, and audit. Model quality still matters for which call gets proposed. It does not substitute for a write being denied. Read versus write is the line."
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import '../styles/global.css';
 
 const {
   title,
-  description = "Notes on AI in small words. Written because the jargon kept needing a 10-year-old version."
+  description = "Plain-language explanations of how AI systems actually work, written by someone who builds with them in federal permitting."
 } = Astro.props;
 const year = new Date().getFullYear();
 const path = Astro.url.pathname;
@@ -25,9 +25,9 @@ const onMemes = path.startsWith('/memes');
   <link rel="me" href="https://adlerarcher.com/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
-<body class:list={[onHome && 'home']}>
+<body class:list={[onHome && 'home', onMemes && 'memes']}>
   <div class="wrap">
     <div class="topline">
       <a class:list={['homechip', onHome && 'is-on']} href="/" aria-label="AI410 home">

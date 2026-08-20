@@ -1,0 +1,20 @@
+{
+  "number": "03",
+  "slug": "tools",
+  "title": "Tools: letting it do something",
+  "blurb": "The model calls a function that runs somewhere else and comes back with a result.",
+  "paras": [
+    {
+      "kid": "Sometimes reading is not enough. You want a number from a live system, or a list of rooms that are free, or a form filled from a real record. Then the model has to call a function that runs somewhere else, wait for the answer, and use that answer in the next sentence. People call that tool use.",
+      "grown": "Tool use is the model emitting a structured call to an external function, receiving a result, and continuing. The capability is older than any one protocol. Vendors implemented it as plugins, function calling, and custom APIs, each with a different shape."
+    },
+    {
+      "kid": "A tool can be polite and only look. 'What flights are there on Tuesday?' The function goes, looks, and brings back a list. The model still has not booked anything. It has only been handed a fresh page, this time by a program instead of by you pasting.",
+      "grown": "A read-only tool is retrieval with a function boundary: live data, permissions, and a return value, still without mutation. Many demos stop here because the result looks like competence while remaining reversible."
+    },
+    {
+      "kid": "A tool can also change things: send the email, book the room, file the form. That is still tool use. It is a different kind of tool. Mixing 'it looked it up' with 'it did it' is how this whole category turns into fog.",
+      "grown": "Write tools have side effects. The interface may look identical to a read: a name, some arguments, a result. The difference is whether the callee mutates state. Treating look-up and mutation as one idea is the usual source of confusion later, when people say 'agent' and mean both."
+    }
+  ]
+}
