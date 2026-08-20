@@ -1,0 +1,327 @@
+---
+interface Props {
+	size?: 'hero' | 'compact' | 'loader';
+	class?: string;
+}
+
+const { size = 'hero', class: className } = Astro.props;
+const uid =
+	size === 'compact' ? 'gateway-globe-compact' : size === 'loader' ? 'gateway-globe-loader' : 'gateway-globe-hero';
+---
+
+<div
+	class:list={[
+		'gateway-globe',
+		size === 'compact' && 'gateway-globe--compact',
+		size === 'loader' && 'gateway-globe--loader',
+		className
+	]}
+	aria-hidden="true"
+	data-gateway-globe={size === 'hero' ? '' : undefined}
+>
+	<div class="gateway-globe__corona"></div>
+	<div class="gateway-globe__halo gateway-globe__halo--a"></div>
+	<div class="gateway-globe__halo gateway-globe__halo--b"></div>
+	<div class="gateway-globe__shell">
+		<div class="gateway-globe__sphere"></div>
+		<svg class="gateway-globe__wire" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+			<defs>
+				<clipPath id={`${uid}-clip`}>
+					<circle cx="100" cy="100" r="88" />
+				</clipPath>
+			</defs>
+			<g clip-path={`url(#${uid}-clip)`}>
+				<g class="gateway-globe__spin gateway-globe__spin--a">
+					<ellipse cx="100" cy="100" rx="88" ry="28" stroke="currentColor" stroke-width="0.75" opacity="0.35" />
+					<ellipse cx="100" cy="100" rx="88" ry="52" stroke="currentColor" stroke-width="0.75" opacity="0.28" />
+					<ellipse cx="100" cy="100" rx="88" ry="72" stroke="currentColor" stroke-width="0.75" opacity="0.22" />
+					<ellipse cx="100" cy="100" rx="28" ry="88" stroke="currentColor" stroke-width="0.75" opacity="0.32" />
+					<ellipse cx="100" cy="100" rx="52" ry="88" stroke="currentColor" stroke-width="0.75" opacity="0.26" />
+					<ellipse cx="100" cy="100" rx="72" ry="88" stroke="currentColor" stroke-width="0.75" opacity="0.2" />
+				</g>
+				<g class="gateway-globe__spin gateway-globe__spin--b">
+					<ellipse cx="100" cy="100" rx="88" ry="40" stroke="currentColor" stroke-width="0.5" opacity="0.18" transform="rotate(35 100 100)" />
+					<ellipse cx="100" cy="100" rx="40" ry="88" stroke="currentColor" stroke-width="0.5" opacity="0.18" transform="rotate(35 100 100)" />
+					<ellipse cx="100" cy="100" rx="88" ry="62" stroke="currentColor" stroke-width="0.5" opacity="0.14" transform="rotate(-28 100 100)" />
+					<ellipse cx="100" cy="100" rx="62" ry="88" stroke="currentColor" stroke-width="0.5" opacity="0.14" transform="rotate(-28 100 100)" />
+				</g>
+			</g>
+			<circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="1.1" opacity="0.55" />
+		</svg>
+		<div class="gateway-globe__specular"></div>
+	</div>
+	<div class="gateway-globe__equator"></div>
+	<div class="gateway-globe__ring gateway-globe__ring--a"></div>
+	<div class="gateway-globe__ring gateway-globe__ring--b"></div>
+</div>
+
+<style>
+	.gateway-globe {
+		--globe-size: 12rem;
+		position: relative;
+		width: var(--globe-size);
+		height: var(--globe-size);
+		color: rgba(166, 124, 46, 0.88);
+		perspective: 600px;
+	}
+
+	.gateway-globe--compact {
+		--globe-size: 1.65rem;
+	}
+
+	.gateway-globe--loader {
+		--globe-size: min(16rem, 58vw);
+	}
+
+	.gateway-globe__corona {
+		display: none;
+	}
+
+	.gateway-globe:not(.gateway-globe--compact) .gateway-globe__corona {
+		display: block;
+		position: absolute;
+		inset: -42%;
+		border-radius: 9999px;
+		border: 1px solid rgba(201, 148, 58, 0.18);
+		box-shadow:
+			0 0 32px rgba(255, 220, 160, 0.35),
+			0 0 64px rgba(201, 148, 58, 0.12),
+			inset 0 0 32px rgba(255, 248, 235, 0.4);
+		animation: gateway-corona-pulse 4.5s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	.gateway-globe__halo {
+		position: absolute;
+		border-radius: 9999px;
+		filter: blur(24px);
+		pointer-events: none;
+	}
+
+	.gateway-globe__halo--a {
+		inset: -18%;
+		background: radial-gradient(circle, rgba(255, 220, 160, 0.35) 0%, transparent 68%);
+		animation: gateway-globe-halo 5s ease-in-out infinite alternate;
+	}
+
+	.gateway-globe__halo--b {
+		inset: -8%;
+		background: radial-gradient(circle, rgba(61, 117, 136, 0.12) 0%, transparent 72%);
+		animation: gateway-globe-halo 7.5s ease-in-out infinite alternate-reverse;
+	}
+
+	.gateway-globe--compact .gateway-globe__halo {
+		display: none;
+	}
+
+	.gateway-globe__shell {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		border-radius: 9999px;
+		transform-style: preserve-3d;
+		transition: transform 0.35s ease-out;
+	}
+
+	.gateway-globe:not(.gateway-globe--compact) {
+		animation: gateway-globe-float 6s ease-in-out infinite;
+	}
+
+	.gateway-globe__sphere {
+		position: absolute;
+		inset: 0;
+		border-radius: 9999px;
+		background:
+			radial-gradient(circle at 32% 28%, rgba(212, 184, 122, 0.35) 0%, transparent 38%),
+			radial-gradient(circle at 68% 72%, rgba(90, 159, 176, 0.28) 0%, transparent 42%),
+			radial-gradient(circle at 50% 55%, rgba(18, 32, 56, 0.95) 0%, rgba(10, 20, 36, 0.98) 55%, rgba(5, 10, 20, 1) 100%);
+		box-shadow:
+			inset -0.25rem -0.35rem 0.85rem rgba(0, 0, 0, 0.55),
+			inset 0.2rem 0.15rem 0.65rem rgba(212, 184, 122, 0.15),
+			0 0 0 1px rgba(201, 148, 58, 0.28),
+			0 0 28px rgba(255, 220, 160, 0.22),
+			0 0 48px rgba(201, 148, 58, 0.14);
+	}
+
+	.gateway-globe--compact .gateway-globe__sphere {
+		box-shadow:
+			inset -0.1rem -0.12rem 0.35rem rgba(0, 0, 0, 0.45),
+			inset 0.08rem 0.06rem 0.25rem rgba(247, 243, 235, 0.1),
+			0 0 0 1px rgba(212, 184, 114, 0.4),
+			0 0 10px rgba(212, 184, 114, 0.25);
+	}
+
+	.gateway-globe__wire {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.gateway-globe__spin {
+		transform-origin: 100px 100px;
+	}
+
+	.gateway-globe__spin--a {
+		animation: gateway-globe-spin 24s linear infinite;
+	}
+
+	.gateway-globe__spin--b {
+		animation: gateway-globe-spin 36s linear infinite reverse;
+	}
+
+	.gateway-globe--compact .gateway-globe__spin--a {
+		animation-duration: 18s;
+	}
+
+	.gateway-globe--compact .gateway-globe__spin--b {
+		animation-duration: 28s;
+	}
+
+	.gateway-globe__specular {
+		position: absolute;
+		top: 14%;
+		left: 18%;
+		width: 28%;
+		height: 22%;
+		border-radius: 9999px;
+		background: radial-gradient(circle, rgba(247, 243, 235, 0.55) 0%, transparent 72%);
+		filter: blur(1px);
+		animation: gateway-globe-shimmer 4.5s ease-in-out infinite;
+	}
+
+	.gateway-globe--compact .gateway-globe__specular {
+		top: 12%;
+		left: 16%;
+		width: 32%;
+		height: 24%;
+	}
+
+	.gateway-globe__equator {
+		position: absolute;
+		top: 50%;
+		left: -8%;
+		width: 116%;
+		height: 116%;
+		border-radius: 9999px;
+		border: 1px solid rgba(212, 184, 114, 0.22);
+		transform: translateY(-50%) rotateX(72deg);
+		pointer-events: none;
+		animation: gateway-globe-equator 10s linear infinite;
+	}
+
+	.gateway-globe--compact .gateway-globe__equator,
+	.gateway-globe--compact .gateway-globe__ring {
+		display: none;
+	}
+
+	.gateway-globe__ring {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		border-radius: 9999px;
+		border: 1px solid rgba(212, 184, 114, 0.18);
+		pointer-events: none;
+	}
+
+	.gateway-globe__ring--a {
+		width: 130%;
+		height: 130%;
+		margin: -65% 0 0 -65%;
+		animation: gateway-globe-ring 14s linear infinite;
+	}
+
+	.gateway-globe__ring--b {
+		width: 158%;
+		height: 158%;
+		margin: -79% 0 0 -79%;
+		border-style: dashed;
+		border-color: rgba(212, 184, 114, 0.12);
+		animation: gateway-globe-ring 22s linear infinite reverse;
+	}
+
+	@keyframes gateway-globe-float {
+		0%,
+		100% {
+			transform: translateY(0) rotate(-2deg);
+		}
+		50% {
+			transform: translateY(-0.35rem) rotate(2deg);
+		}
+	}
+
+	@keyframes gateway-globe-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes gateway-globe-halo {
+		from {
+			opacity: 0.65;
+			transform: scale(0.96);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1.04);
+		}
+	}
+
+	@keyframes gateway-globe-shimmer {
+		0%,
+		100% {
+			opacity: 0.75;
+		}
+		50% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes gateway-globe-equator {
+		from {
+			transform: translateY(-50%) rotateX(72deg) rotateZ(0deg);
+		}
+		to {
+			transform: translateY(-50%) rotateX(72deg) rotateZ(360deg);
+		}
+	}
+
+	@keyframes gateway-globe-ring {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes gateway-corona-pulse {
+		0%,
+		100% {
+			opacity: 0.75;
+			transform: scale(0.96);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.04);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.gateway-globe:not(.gateway-globe--compact),
+		.gateway-globe__spin--a,
+		.gateway-globe__spin--b,
+		.gateway-globe__halo--a,
+		.gateway-globe__halo--b,
+		.gateway-globe__specular,
+		.gateway-globe__equator,
+		.gateway-globe__ring--a,
+		.gateway-globe__ring--b,
+		.gateway-globe__corona {
+			animation: none !important;
+		}
+	}
+</style>

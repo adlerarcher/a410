@@ -1,0 +1,160 @@
+---
+/** Original parchment + cartographic texture — inspired by antique maps, not a reproduction. */
+import { ANTIQUE_MAP_LAND_PATHS } from '../data/antique-map-land';
+---
+
+<div class="antique-map pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true" data-antique-map>
+	<div class="antique-map__parchment"></div>
+
+	<svg class="antique-map__chart" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+		<defs>
+			<pattern id="antique-grid" width="80" height="80" patternUnits="userSpaceOnUse">
+				<path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(201, 169, 98, 0.06)" stroke-width="0.75" />
+			</pattern>
+		</defs>
+
+		<rect width="1200" height="900" fill="url(#antique-grid)" />
+
+		<g class="antique-map__land">
+			{ANTIQUE_MAP_LAND_PATHS.map((d) => <path d={d} />)}
+		</g>
+
+		<!-- Faint meridians -->
+		<g stroke="rgba(201, 169, 98, 0.08)" stroke-width="1" fill="none">
+			<line x1="300" y1="0" x2="300" y2="900" stroke-dasharray="3 10" />
+			<line x1="600" y1="0" x2="600" y2="900" stroke-dasharray="3 10" />
+			<line x1="900" y1="0" x2="900" y2="900" stroke-dasharray="3 10" />
+			<line x1="0" y1="300" x2="1200" y2="300" stroke-dasharray="3 10" />
+			<line x1="0" y1="600" x2="1200" y2="600" stroke-dasharray="3 10" />
+		</g>
+
+		<!-- Soft horizon arcs -->
+		<g fill="none" stroke="rgba(201, 169, 98, 0.07)" stroke-width="0.75">
+			<ellipse cx="600" cy="460" rx="420" ry="140" />
+			<ellipse cx="600" cy="460" rx="560" ry="220" stroke-dasharray="2 12" />
+		</g>
+
+		<!-- Corner compass — decorative only -->
+		<g transform="translate(1040,760)" opacity="0.35">
+			<circle r="28" fill="none" stroke="rgba(201, 169, 98, 0.35)" stroke-width="0.75" />
+			<path d="M 0 -22 L 5 0 L 0 22 L -5 0 Z" fill="rgba(201, 169, 98, 0.12)" stroke="rgba(201, 169, 98, 0.3)" />
+			<text
+				y="-30"
+				text-anchor="middle"
+				fill="rgba(212, 184, 122, 0.55)"
+				font-family="Cormorant Garamond, Georgia, serif"
+				font-size="11"
+				font-style="italic">N</text
+			>
+		</g>
+
+		<!-- Map border -->
+		<rect
+			x="48"
+			y="48"
+			width="1104"
+			height="804"
+			fill="none"
+			stroke="rgba(201, 169, 98, 0.14)"
+			stroke-width="1"
+			rx="1"
+		></rect>
+	</svg>
+
+	<div class="antique-map__clear-zone"></div>
+	<div class="antique-map__grain"></div>
+	<div class="antique-map__vignette"></div>
+</div>
+
+<script>
+	function initAntiqueMapParallax() {
+		const map = document.querySelector('[data-antique-map]');
+		const parchment = map?.querySelector('.antique-map__parchment') as HTMLElement | null;
+		const chart = map?.querySelector('.antique-map__chart') as SVGSVGElement | null;
+		if (!map || !parchment || !chart) return;
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+		let raf = 0;
+		document.addEventListener('pointermove', (event) => {
+			if (raf) return;
+			raf = requestAnimationFrame(() => {
+				raf = 0;
+				const x = event.clientX / window.innerWidth - 0.5;
+				const y = event.clientY / window.innerHeight - 0.5;
+				parchment.style.transform = `translate(${x * 6}px, ${y * 4}px)`;
+				chart.style.transform = `translate(${x * -8}px, ${y * -5}px)`;
+			});
+		});
+
+		document.addEventListener('pointerleave', () => {
+			parchment.style.transform = '';
+			chart.style.transform = '';
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initAntiqueMapParallax, { once: true });
+	} else {
+		initAntiqueMapParallax();
+	}
+</script>
+
+<style>
+	.antique-map__parchment {
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(ellipse 85% 65% at 22% 18%, rgba(201, 169, 98, 0.08) 0%, transparent 55%),
+			radial-gradient(ellipse 70% 55% at 78% 82%, rgba(90, 159, 176, 0.06) 0%, transparent 52%),
+			linear-gradient(165deg, #0c1222 0%, #0a1424 40%, #050a14 100%);
+		transition: transform 0.45s ease-out;
+		will-change: transform;
+	}
+
+	.antique-map__chart {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0.82;
+		transition: transform 0.45s ease-out;
+		will-change: transform;
+	}
+
+	.antique-map__land {
+		fill: rgba(201, 169, 98, 0.08);
+		stroke: rgba(212, 184, 122, 0.22);
+		stroke-width: 0.65;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+	}
+
+	/* Keep the hero center readable — soft wash over open ocean */
+	.antique-map__clear-zone {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse 50% 44% at 50% 48%, rgba(10, 20, 36, 0.55) 0%, transparent 70%);
+	}
+
+	.antique-map__grain {
+		position: absolute;
+		inset: 0;
+		opacity: 0.22;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+		background-size: 200px 200px;
+		mix-blend-mode: soft-light;
+	}
+
+	.antique-map__vignette {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse 95% 85% at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.35) 100%);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.antique-map__parchment,
+		.antique-map__chart {
+			transition: none;
+		}
+	}
+</style>

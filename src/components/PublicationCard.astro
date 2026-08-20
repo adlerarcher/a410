@@ -1,0 +1,72 @@
+---
+export interface PubAction {
+	href: string;
+	label: string;
+}
+
+interface Props {
+	id: string;
+	title: string;
+	description: string;
+	detailLines?: string[];
+	actions?: PubAction[];
+	/** When true, show coming-soon label instead of outbound links */
+	linksComingSoon?: boolean;
+	/** Label when `linksComingSoon` is true (default: “Coming soon”) */
+	comingSoonLabel?: string;
+	/** Stagger motion when multiple cards (e.g. 0, 1 on homepage) */
+	staggerIndex?: number;
+}
+
+const {
+	id,
+	title,
+	description,
+	detailLines = [],
+	actions = [],
+	linksComingSoon = false,
+	comingSoonLabel = 'Coming soon',
+	staggerIndex = 0
+} = Astro.props;
+const hasDetails = detailLines.length > 0;
+const staggerMs = staggerIndex * 220;
+---
+
+<section id={id} class="publication-card scroll-mt-24" style={`--pub-stagger: ${staggerMs}ms`}>
+	<h2 class="publication-card__title font-display text-2xl font-semibold tracking-tight text-site-ink md:text-[1.75rem]">
+		{title}
+	</h2>
+	<p class="publication-card__desc mt-4 font-serif leading-relaxed text-site-muted">{description}</p>
+	<div
+		class="publication-card__panel mt-8 border-l-2 border-site-gold/35 bg-site-cream-2/80 px-5 py-6 md:px-6 md:py-7"
+	>
+		{
+			hasDetails && (
+				<div class="space-y-2">
+					{detailLines.map((line) => (
+						<p class="text-xs font-medium leading-relaxed text-site-muted">{line}</p>
+					))}
+				</div>
+			)
+		}
+		<div class:list={['flex flex-col gap-3', hasDetails && 'mt-5']}>
+			{
+				linksComingSoon ? (
+					<p class="publication-card__soon text-sm font-medium tracking-wide text-site-muted">{comingSoonLabel}</p>
+				) : (
+					actions.map((a) => (
+						<a
+							href={a.href}
+							class="group inline-flex items-center gap-2 text-sm font-medium text-site-gold transition hover:gap-3"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{a.label}
+							<span aria-hidden="true">→</span>
+						</a>
+					))
+				)
+			}
+		</div>
+	</div>
+</section>

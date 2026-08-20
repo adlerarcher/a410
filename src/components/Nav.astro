@@ -1,0 +1,55 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import GatewayGlobeMark from './GatewayGlobeMark.astro';
+
+interface Props {
+	variant?: 'default' | 'workshop';
+	overlay?: boolean;
+}
+
+const { variant = 'default', overlay = false } = Astro.props;
+
+const wordmarkClass =
+	variant === 'workshop'
+		? 'nav-brand-wordmark font-major-mono text-lg sm:text-xl text-workshop-accent'
+		: 'nav-brand-wordmark font-major-mono text-aa-gold-500 text-lg sm:text-xl';
+
+const markClass =
+	variant === 'workshop'
+		? 'text-workshop-muted transition-colors group-hover:text-workshop-ink'
+		: 'text-site-muted transition-colors group-hover:text-aa-gold-500';
+---
+
+<header
+	class:list={[
+		'z-50 overflow-visible',
+		overlay ? 'absolute inset-x-0 top-0 border-none bg-transparent' : 'relative border-b border-site-border bg-site-cream/90',
+		variant === 'workshop' && !overlay && 'border-workshop-border bg-workshop-paper/90'
+	]}
+>
+	<div class="mx-auto flex max-w-5xl items-center justify-between gap-6 px-6 py-5 backdrop-blur-[2px]">
+		<a
+			href="/"
+			class="nav-brand-link group inline-flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-95 sm:gap-3"
+			aria-label="Adler Archer"
+		>
+			{variant === 'default' && (
+				<GatewayGlobeMark class:list={['h-7 w-7 shrink-0 sm:h-8 sm:w-8', markClass]} />
+			)}
+			<span class={wordmarkClass} aria-hidden="true">Adler ArcHer</span>
+		</a>
+		<nav aria-label="Social" class="min-w-0">
+			<SocialLinks variant={variant} overlay={overlay} />
+		</nav>
+	</div>
+</header>
+
+<style is:global>
+	.nav-brand-link .nav-brand-wordmark {
+		font-family: var(--font-major-mono) !important;
+		font-weight: 400;
+		font-style: normal;
+		font-synthesis: none;
+		letter-spacing: 0.04em;
+	}
+</style>

@@ -1,0 +1,90 @@
+---
+import FounderStage from './FounderStage.astro';
+
+interface Props {
+	showPortrait?: boolean;
+	id?: string;
+}
+
+const { showPortrait = true, id } = Astro.props;
+---
+
+<section
+	id={id}
+	class:list={[
+		'relative scroll-mt-24 overflow-x-visible overflow-y-visible border-t border-site-border bg-site-cream-2/40 md:scroll-mt-28',
+		showPortrait ? 'py-16 md:py-24' : 'py-12 md:py-16'
+	]}
+	aria-labelledby="about-heading"
+>
+	<div class="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+		<div class="absolute -left-24 top-1/4 h-[22rem] w-[22rem] rounded-full bg-site-burgundy/15 blur-[56px]"></div>
+		<div class="absolute -right-20 bottom-1/4 h-[22rem] w-[22rem] rounded-full bg-site-gold/10 blur-[56px]"></div>
+		<div class="absolute left-1/3 top-0 h-[14rem] w-[14rem] -translate-x-1/2 rounded-full bg-site-forest/12 blur-[40px]"></div>
+		<img
+			src="/images/work-ecosystem-city.jpg"
+			alt=""
+			width="1920"
+			height="1080"
+			class="h-full min-h-full w-full scale-105 object-cover object-center opacity-[0.12] blur-[2px]"
+			loading="lazy"
+			decoding="async"
+		/>
+		<div class="absolute inset-0 bg-site-cream/90"></div>
+		<div
+			class="absolute inset-0 bg-[radial-gradient(ellipse_90%_75%_at_50%_25%,rgba(201,169,98,0.06),transparent_58%)]"
+		>
+		</div>
+		<div
+			class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-site-gold/30 to-transparent"
+		>
+		</div>
+	</div>
+
+	<div class="relative z-[1] mx-auto max-w-6xl px-4 md:px-8">
+		<header class="text-center">
+			<h2
+				id="about-heading"
+				class="font-display text-3xl font-semibold tracking-tight text-site-gold md:text-4xl"
+			>
+				About Adler Archer
+			</h2>
+		</header>
+
+		{
+			showPortrait && (
+				<div class="mt-8 flex justify-center md:mt-10">
+					<FounderStage variant="about" flush showJd={false} />
+				</div>
+			)
+		}
+
+		<div
+			class:list={[
+				'mx-auto max-w-[660px] space-y-6 px-2 md:space-y-7 md:px-0',
+				showPortrait ? 'mt-14 md:mt-16' : 'mt-8 md:mt-10'
+			]}
+		>
+			<p class="font-serif text-[1.05rem] leading-[1.75] text-site-muted md:text-[1.125rem] md:leading-[1.8]">
+				I was born in the Deep South and raised in Japan. I come from a military family and enlisted in the Air Force at
+				seventeen. My siblings joined the military soon after. My work since has spanned aerospace, law, health systems, and
+				public service, in the United States and abroad.
+			</p>
+
+			<figure class="border-y border-site-gold/20 py-6 md:py-7">
+				<blockquote
+					class="mx-auto max-w-[34rem] text-center font-serif text-[1.08rem] italic leading-[1.65] text-site-ink/94 md:text-[1.125rem] md:leading-[1.7]"
+				>
+					How does a person remain effective as the scope and complexity of their lives increase?
+				</blockquote>
+			</figure>
+
+			<p class="font-serif text-[1.05rem] leading-[1.75] text-site-muted md:text-[1.125rem] md:leading-[1.8]">
+				I return to that question often. Service in the Air Force taught me discipline and mission clarity; faculty work,
+				law, and public leadership since then have required judgment in conditions that rarely offer a clear right answer.
+				I read widely and write when I have thought something through. I do not expect the question to go away. I have
+				learned to meet it with preparation, sound judgment, and the confidence to lead when the path ahead is unclear.
+			</p>
+		</div>
+	</div>
+</section>

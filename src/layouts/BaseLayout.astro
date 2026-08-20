@@ -1,0 +1,160 @@
+---
+import '../styles/global.css';
+import SiteLoader from '../components/SiteLoader.astro';
+import { siteUnderConstruction } from '../site-flags';
+import { buildPersonSchema } from '../data/person-schema';
+import {
+	SITE_DEFAULT_DESCRIPTION,
+	SITE_GATEWAY_LABEL,
+	SITE_NAME,
+	SITE_OG_IMAGE,
+	SITE_PERSON_NAME
+} from '../data/site-meta';
+
+interface Props {
+	title: string;
+	description?: string;
+	variant?: 'default' | 'workshop';
+	/** Open Graph / Twitter image path from site root (absolute URL built at deploy). */
+	ogImage?: string;
+	/**
+	 * When true, emit noindex. Defaults to `siteUnderConstruction` so coming-soon builds stay out of search.
+	 * Set `false` to force index on a page while the rest of the build is under construction (rare).
+	 */
+	noindex?: boolean;
+	/** Emit WebSite + Person JSON-LD (default: true). */
+	jsonLd?: boolean;
+}
+
+const {
+	title,
+	description = SITE_DEFAULT_DESCRIPTION,
+	variant = 'default',
+	ogImage = SITE_OG_IMAGE,
+	noindex: noindexProp,
+	jsonLd = true
+} = Astro.props;
+
+const noindex = noindexProp !== undefined ? noindexProp : siteUnderConstruction;
+
+const siteOrigin = (Astro.site ?? new URL('https://helloadler.com')).origin;
+const canonicalURL = new URL(Astro.url.pathname, siteOrigin);
+const ogImageURL = new URL(ogImage.startsWith('/') ? ogImage : `/${ogImage}`, siteOrigin).href;
+
+const siteName = SITE_NAME;
+const pageTitle =
+	title === siteName || title.endsWith(` · ${siteName}`) ? title : `${title} · ${siteName}`;
+
+const schemaGraph = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${siteOrigin}/#website`,
+			url: `${siteOrigin}/`,
+			name: siteName,
+			alternateName: [SITE_GATEWAY_LABEL, 'helloadler.com'],
+			description,
+			inLanguage: 'en-US',
+			about: { '@id': `${siteOrigin}/#person` },
+			publisher: { '@id': `${siteOrigin}/#person` }
+		},
+		buildPersonSchema(siteOrigin, description)
+	]
+};
+
+const fontHref =
+	'https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Monoton&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap';
+---
+
+<!doctype html>
+<html lang="en" class:list={[variant === 'workshop' && 'workshop-html']}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/images/adler-archer-site-logo.png" sizes="512x512" />
+		<link rel="apple-touch-icon" href="/images/adler-archer-site-logo.png" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="author" content={SITE_PERSON_NAME} />
+		{noindex && <meta name="robots" content="noindex" />}
+		<link rel="canonical" href={canonicalURL.href} />
+		<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" title="Sitemap" />
+		<link rel="me" href="https://adlerarcher.com" />
+		<link rel="me" href="https://www.linkedin.com/in/adlerarcher" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:image:alt" content={`${SITE_PERSON_NAME} — site logo`} />
+		<meta property="og:locale" content="en_US" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
+		<title>{pageTitle}</title>
+		{jsonLd && !noindex && (
+			<script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
+		)}
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="preload"
+			href="/fonts/MajorMonoDisplay-Regular.ttf"
+			as="font"
+			type="font/ttf"
+			crossorigin
+		/>
+		<link href={fontHref} rel="stylesheet" />
+		{variant === 'workshop' && (
+			<style is:global>
+				.workshop-html body {
+					background: var(--color-workshop-paper);
+					color: var(--color-workshop-ink);
+				}
+			</style>
+		)}
+	</head>
+	<body
+		class:list={[
+			variant === 'workshop' ? 'min-h-screen bg-workshop-paper text-workshop-ink' : 'site-shell min-h-screen'
+		]}
+	>
+		{variant === 'default' && <SiteLoader />}
+		<slot />
+		<script is:inline>
+			(function () {
+				function revealFounder() {
+					var els = document.querySelectorAll('[data-founder-reveal]');
+					if (!els.length) return;
+					if (!('IntersectionObserver' in window)) {
+						els.forEach(function (el) {
+							el.classList.add('is-visible');
+						});
+						return;
+					}
+					var obs = new IntersectionObserver(
+						function (entries) {
+							entries.forEach(function (entry) {
+								if (entry.isIntersecting) {
+									entry.target.classList.add('is-visible');
+								}
+							});
+						},
+						{ threshold: [0, 0.08, 0.12], rootMargin: '0px 0px -6% 0px' }
+					);
+					els.forEach(function (el) {
+						obs.observe(el);
+					});
+				}
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', revealFounder);
+				} else {
+					revealFounder();
+				}
+			})();
+		</script>
+	</body>
+</html>

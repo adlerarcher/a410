@@ -1,0 +1,32 @@
+---
+const officialLinks = [
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/adlerarcher' },
+	{ label: 'PIF fellow profile', href: 'https://presidentialinnovationfellows.gov/fellows/adler-archer/' },
+	{ label: 'Adloris Foundation', href: 'https://adloris.org' },
+	{ label: 'Archer Lab', href: 'https://adlerarcherlab.org' },
+	{ label: 'The writing (adlerarcher.com)', href: 'https://adlerarcher.com' }
+];
+---
+
+<section id="contact" class="scroll-mt-24 border-t border-site-border/70 px-6 py-14 md:py-20" aria-labelledby="contact-heading">
+	<div class="mx-auto max-w-3xl">
+		<h2 id="contact-heading" class="font-display text-2xl font-semibold text-site-ink md:text-3xl">Contact</h2>
+		<p class="mt-3 font-serif text-site-muted">Official outbound links. This gateway does not publish a personal inbox.</p>
+		<ul class="mt-8 space-y-3">
+			{
+				officialLinks.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							class="font-display text-base text-site-gold underline-offset-4 hover:underline"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{link.label} →
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

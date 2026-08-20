@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import GatewayHero from '../components/GatewayHero.astro';
+import AntiqueMapBackground from '../components/AntiqueMapBackground.astro';
+import UnderConstruction from '../components/UnderConstruction.astro';
+import { siteUnderConstruction } from '../site-flags';
+import { SITE_HOME_DESCRIPTION, SITE_HOME_TITLE } from '../data/site-meta';
+
+const fullTitle = SITE_HOME_TITLE;
+const fullDescription = SITE_HOME_DESCRIPTION;
+const maintenanceTitle = 'Coming soon · Adler Archer';
+const maintenanceDescription = 'helloadler.com — Adler Archer gateway — is being updated.';
+---
+
+<BaseLayout
+	title={siteUnderConstruction ? maintenanceTitle : fullTitle}
+	description={siteUnderConstruction ? maintenanceDescription : fullDescription}
+>
+	{
+		siteUnderConstruction ? (
+			<UnderConstruction />
+		) : (
+			<div class="gateway-page relative isolate flex min-h-screen flex-col bg-site-cream">
+				<AntiqueMapBackground />
+				<Nav overlay />
+				<main class="relative z-[1] flex-1">
+					<GatewayHero />
+				</main>
+				<Footer transparent />
+			</div>
+		)
+	}
+</BaseLayout>

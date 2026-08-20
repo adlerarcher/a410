@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" fill="none" aria-hidden="true">
+	<rect width="160" height="100" fill="#141210"/>
+	<g stroke="#c9a962" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<!-- Mountains -->
+		<path d="M16 82 L44 42 L72 82" fill="#1a1814"/>
+		<path d="M16 82 L44 42 L72 82"/>
+		<path d="M52 82 L84 28 L116 82" fill="#0c0b09"/>
+		<path d="M52 82 L84 28 L116 82"/>
+		<path d="M96 82 L124 50 L144 82" fill="#1a1814"/>
+		<path d="M96 82 L124 50 L144 82"/>
+		<!-- Pines -->
+		<path d="M28 82 L34 62 L40 82M34 62 L34 54" />
+		<path d="M120 82 L128 56 L136 82M128 56 L128 46" />
+		<!-- Sun -->
+		<circle cx="130" cy="24" r="9" opacity="0.9"/>
+	</g>
+</svg>

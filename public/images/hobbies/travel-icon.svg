@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" fill="none" aria-hidden="true">
+	<rect width="160" height="100" fill="#141210"/>
+	<g stroke="#c9a962" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<!-- Globe -->
+		<circle cx="56" cy="50" r="28" fill="#1a1814"/>
+		<circle cx="56" cy="50" r="28"/>
+		<ellipse cx="56" cy="50" rx="10" ry="28" opacity="0.4"/>
+		<path d="M28 50h56" opacity="0.35"/>
+		<path d="M56 22c-8 10-8 46 0 56" opacity="0.35"/>
+		<!-- Airplane -->
+		<path d="M118 38 L138 48 L128 50 L132 58 L126 54 L120 62 L116 52 L108 54 Z" fill="#0c0b09" stroke="#c9a962"/>
+		<!-- Arc trail -->
+		<path d="M88 62 Q108 28 132 44" fill="none" opacity="0.55" stroke-dasharray="4 3"/>
+		<!-- Suitcase -->
+		<rect x="102" y="66" width="36" height="22" rx="2" fill="#1a1814"/>
+		<rect x="102" y="66" width="36" height="22" rx="2"/>
+		<path d="M114 66v-6h12v6" />
+		<path d="M118 74h4" opacity="0.5"/>
+	</g>
+</svg>

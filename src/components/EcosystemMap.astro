@@ -1,0 +1,101 @@
+---
+import {
+	ECOSYSTEM_CONTROLLED,
+	ECOSYSTEM_AFFILIATIONS,
+	ECOSYSTEM_PROGRAMS,
+	ECOSYSTEM_CORPUS,
+	type EcosystemEntry
+} from '../data/ecosystem';
+
+function entryLink(entry: EcosystemEntry) {
+	const linkProps = entry.external
+		? { target: '_blank', rel: 'noopener noreferrer' }
+		: {};
+	return { href: entry.href, ...linkProps };
+}
+---
+
+<section id="start" class="scroll-mt-24 border-t border-site-border/70 px-6 py-14 md:py-20" aria-labelledby="ecosystem-heading">
+	<div class="mx-auto max-w-3xl">
+		<h2 id="ecosystem-heading" class="font-display text-2xl font-semibold text-site-ink md:text-3xl">
+			Ecosystem map
+		</h2>
+		<p class="mt-3 font-serif text-site-muted">
+			What Adler controls, what he is attached to, and where to go next.
+		</p>
+
+		<div class="mt-10 space-y-10">
+			<div>
+				<h3 class="font-mono text-[10px] uppercase tracking-[0.35em] text-site-gold">Entities controlled</h3>
+				<p class="mt-1 text-sm text-site-muted">Owned and directed — permanent infrastructure.</p>
+				<ul class="mt-5 space-y-5">
+					{
+						ECOSYSTEM_CONTROLLED.map((entry) => (
+							<li class="border-l-2 border-site-gold/35 pl-4">
+								<a
+									class="font-display text-lg font-medium text-site-gold underline-offset-4 hover:underline"
+									{...entryLink(entry)}
+								>
+									{entry.name}
+								</a>
+								<p class="mt-1 font-serif text-sm leading-relaxed text-site-muted">{entry.description}</p>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<h3 class="font-mono text-[10px] uppercase tracking-[0.35em] text-site-gold">Affiliations held</h3>
+				<p class="mt-1 text-sm text-site-muted">Current, time-bounded — attached to, not owned.</p>
+				<ul class="mt-5 space-y-5">
+					{
+						ECOSYSTEM_AFFILIATIONS.map((entry) => (
+							<li class="border-l-2 border-site-border pl-4">
+								<a
+									class="font-display text-lg font-medium text-site-ink underline-offset-4 hover:text-site-gold hover:underline"
+									{...entryLink(entry)}
+								>
+									{entry.name}
+								</a>
+								<p class="mt-1 font-serif text-sm leading-relaxed text-site-muted">{entry.description}</p>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<h3 class="font-mono text-[10px] uppercase tracking-[0.35em] text-site-gold">Programs</h3>
+				<ul class="mt-5 space-y-5">
+					{
+						ECOSYSTEM_PROGRAMS.map((entry) => (
+							<li class="border-l-2 border-site-border pl-4">
+								<a
+									class="font-display text-lg font-medium text-site-ink underline-offset-4 hover:text-site-gold hover:underline"
+									href={entry.href}
+								>
+									{entry.name}
+								</a>
+								<p class="mt-1 font-serif text-sm leading-relaxed text-site-muted">{entry.description}</p>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div class="border border-site-border/70 bg-site-cream-2/55 px-5 py-6 md:px-6">
+				<h3 class="font-mono text-[10px] uppercase tracking-[0.35em] text-site-gold">Body of work</h3>
+				<a
+					class="mt-3 inline-flex font-display text-lg font-medium text-site-gold underline-offset-4 hover:underline"
+					href={ECOSYSTEM_CORPUS.href}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					The writing &amp; ideas → Adler Archer
+				</a>
+				<p class="mt-2 font-serif text-sm leading-relaxed text-site-muted">{ECOSYSTEM_CORPUS.description}</p>
+			</div>
+		</div>
+	</div>
+</section>

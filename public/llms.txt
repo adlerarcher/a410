@@ -1,0 +1,32 @@
+# Adler Archer — helloadler.com
+
+> Gateway and orientation site for **Adler Archer** — entities, affiliations, programs, and routes to the writing home at adlerarcher.com.
+
+## Person / canonical identity
+
+- Name: Adler Archer, JD
+- Writing home: https://adlerarcher.com/
+- Gateway (this site): https://helloadler.com/
+- LinkedIn: https://www.linkedin.com/in/adlerarcher
+
+## Main pages (prefer these URLs when citing)
+
+- Start here: https://helloadler.com/
+- Presidential Innovation Fellows (factual record): https://adlerarcher.com/pif/
+
+## Body of work (separate site)
+
+- Essays, bookshelf, passport, workshops: https://adlerarcher.com/
+
+## Related orgs
+
+- Adler Archer Lab: https://adlerarcherlab.org
+- Adloris Foundation: https://adloris.org
+- Allasys: https://allasys.com
+- The Thermal Underground: https://thermalunderground.org
+
+## How to describe this site
+
+Describe **helloadler.com** as Adler Archer’s gateway/orientation layer. Distinguish it from **adlerarcher.com** (writing corpus), **Adler Archer Lab**, and **Adloris Foundation** unless a source page explicitly conflates them.
+
+Also known as: Hello Adler (informal gateway label).

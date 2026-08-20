@@ -1,0 +1,173 @@
+---
+import { INTERESTS } from '../data/interests';
+
+interface Props {
+	showHeading?: boolean;
+}
+
+const { showHeading = true } = Astro.props;
+const count = INTERESTS.length;
+---
+
+<section
+	class="relative py-10 md:py-16"
+	aria-labelledby={showHeading ? 'interests-cards-heading' : undefined}
+	aria-label={showHeading ? undefined : `A few of my favorite things, ${count} items`}
+>
+	<div class="mx-auto max-w-6xl px-4 md:px-6">
+		{
+			showHeading && (
+				<h2
+					id="interests-cards-heading"
+					class="text-center font-caveat text-3xl font-semibold tracking-tight text-site-gold md:text-4xl"
+				>
+					A few of my favorite things
+				</h2>
+			)
+		}
+		<ul
+			class:list={[
+				'grid list-none grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5',
+				showHeading ? 'mt-10' : 'mt-0'
+			]}
+			role="list"
+		>
+			{INTERESTS.map((item, index) => {
+				const isSvgIcon = item.imageSrc.endsWith('.svg');
+				const isAutomobile = item.label === 'Automobiles';
+				const isTravel = item.label === 'Travel';
+				const isWineTasting = item.label === 'Wine Tasting';
+				return (
+				<li>
+					<div
+						class="interest-card flex h-full flex-col overflow-hidden rounded-sm border border-site-border bg-site-cream-2/80 text-center shadow-[0_6px_24px_-8px_rgba(0,0,0,0.35)] transition-colors hover:border-site-gold/50"
+						style={`--interest-stagger: ${index * 0.14}s`}
+					>
+						<div class="aspect-[4/3] w-full shrink-0 overflow-hidden bg-black/20">
+							<img
+								src={item.imageSrc}
+								alt={item.imageAlt}
+								width="960"
+								height="720"
+								loading="lazy"
+								decoding="async"
+								class:list={[
+									'h-full w-full [image-rendering:auto]',
+									isSvgIcon ? 'object-contain p-6 sm:p-8' : 'object-cover',
+									isAutomobile && 'interest-card__automobile-img',
+									isTravel && 'interest-card__travel-img',
+									isWineTasting && 'interest-card__wine-img'
+								]}
+							/>
+						</div>
+						<div class="flex flex-1 flex-col items-center justify-center gap-2 px-3 py-3 md:gap-2.5 md:px-4 md:py-4">
+							<span class="font-caveat text-[1.05rem] leading-snug text-site-ink md:text-[1.15rem]">{item.label}</span>
+						</div>
+					</div>
+				</li>
+			);
+			})}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.interest-card {
+		animation: interest-card-glow-pulse 3.2s ease-in-out infinite;
+		animation-delay: var(--interest-stagger, 0s);
+	}
+
+	@keyframes interest-card-glow-pulse {
+		0%,
+		100% {
+			box-shadow:
+				0 6px 24px -8px rgba(0, 0, 0, 0.35),
+				0 0 14px -6px rgba(201, 169, 98, 0.15);
+			border-color: rgba(244, 239, 230, 0.12);
+		}
+		50% {
+			box-shadow:
+				0 6px 24px -8px rgba(0, 0, 0, 0.35),
+				0 0 32px 2px rgba(201, 169, 98, 0.42),
+				0 0 48px -8px rgba(201, 169, 98, 0.18);
+			border-color: rgba(201, 169, 98, 0.4);
+		}
+	}
+
+	/* Automobile card: gentle cruise + idle bob on the SUV graphic */
+	.interest-card__automobile-img {
+		animation: automobile-cruise 2.8s ease-in-out infinite;
+		animation-delay: var(--interest-stagger, 0s);
+		will-change: transform;
+	}
+
+	@keyframes automobile-cruise {
+		0%,
+		100% {
+			transform: translateX(-5px) translateY(0);
+		}
+		50% {
+			transform: translateX(5px) translateY(-2px);
+		}
+	}
+
+	/* Travel card: gentle float + bank (globe / plane / suitcase) */
+	.interest-card__travel-img {
+		animation: travel-drift 3.2s ease-in-out infinite;
+		animation-delay: var(--interest-stagger, 0s);
+		will-change: transform;
+	}
+
+	@keyframes travel-drift {
+		0%,
+		100% {
+			transform: translate(0, 3px) rotate(-1.2deg);
+		}
+		33% {
+			transform: translate(4px, -5px) rotate(0.8deg);
+		}
+		66% {
+			transform: translate(-3px, -7px) rotate(1deg);
+		}
+	}
+
+	/* Wine tasting: gentle glass swirl / sip motion */
+	.interest-card__wine-img {
+		animation: wine-swirl 3.6s ease-in-out infinite;
+		animation-delay: var(--interest-stagger, 0s);
+		transform-origin: 55% 65%;
+		will-change: transform;
+	}
+
+	@keyframes wine-swirl {
+		0%,
+		100% {
+			transform: rotate(-3deg) translateY(0);
+		}
+		40% {
+			transform: rotate(4deg) translateY(-3px);
+		}
+		70% {
+			transform: rotate(-1.5deg) translateY(1px);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.interest-card {
+			animation: none;
+			box-shadow: 0 6px 24px -8px rgba(0, 0, 0, 0.35);
+		}
+
+		.interest-card__automobile-img {
+			animation: none;
+		}
+
+		.interest-card__travel-img {
+			animation: none;
+		}
+
+		.interest-card__wine-img {
+			animation: none;
+		}
+	}
+</style>

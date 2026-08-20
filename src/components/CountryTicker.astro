@@ -1,0 +1,15 @@
+---
+import { COUNTRY_MARKERS } from '../data/countries';
+
+const line = COUNTRY_MARKERS.map((c) => c.name).join(' · ');
+---
+
+<div
+	class="about-country-ticker overflow-hidden border-y border-site-border bg-site-cream-2/50 py-3"
+	aria-hidden="true"
+>
+	<div class="about-country-ticker__track font-sans text-xs tracking-wide text-site-muted">
+		<span class="inline-block px-4">{line} · </span>
+		<span class="inline-block px-4">{line} · </span>
+	</div>
+</div>

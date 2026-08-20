@@ -1,0 +1,68 @@
+---
+import { PUBLICATION_RECORDS } from '../data/publications';
+
+const corpusUrl = 'https://adlerarcher.com';
+---
+
+<section
+	id="research"
+	class="scroll-mt-24 border-t border-site-border/70 px-6 py-14 md:py-20"
+	aria-labelledby="research-heading"
+>
+	<div class="mx-auto max-w-3xl">
+		<h2 id="research-heading" class="font-display text-2xl font-semibold text-site-ink md:text-3xl">
+			Research &amp; publications
+		</h2>
+		<p class="mt-3 font-serif text-site-muted">
+			Citable records — citations, DOIs, and official links. Reflective writing about this work lives on{' '}
+			<a href={corpusUrl} class="text-site-gold underline-offset-4 hover:underline" target="_blank" rel="noopener noreferrer">
+				adlerarcher.com
+			</a>.
+		</p>
+
+		{
+			PUBLICATION_RECORDS.length > 0 ? (
+				<ol class="mt-8 list-none space-y-6">
+					{PUBLICATION_RECORDS.map((pub) => (
+						<li class="border-l-2 border-site-border pl-4">
+							<p class="font-display text-lg font-medium text-site-ink">{pub.title}</p>
+							<p class="mt-1 font-serif text-sm text-site-muted">
+								{pub.authors}. <em>{pub.venue}</em>, {pub.year}.
+							</p>
+							<div class="mt-2 flex flex-wrap gap-4 text-sm">
+								{pub.doi && (
+									<a
+										href={`https://doi.org/${pub.doi}`}
+										class="text-site-gold underline-offset-4 hover:underline"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										DOI
+									</a>
+								)}
+								{pub.url && (
+									<a
+										href={pub.url}
+										class="text-site-gold underline-offset-4 hover:underline"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Link
+									</a>
+								)}
+							</div>
+						</li>
+					))}
+				</ol>
+			) : (
+				<p class="mt-8 rounded border border-dashed border-site-border/70 bg-site-cream-2/40 px-5 py-6 font-serif text-sm text-site-muted">
+					Publication records are being compiled. Check back soon, or see{' '}
+					<a href={corpusUrl} class="text-site-gold underline-offset-4 hover:underline" target="_blank" rel="noopener noreferrer">
+						adlerarcher.com
+					</a>{' '}
+					for related writing.
+				</p>
+			)
+		}
+	</div>
+</section>

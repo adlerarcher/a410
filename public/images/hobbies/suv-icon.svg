@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" fill="none" aria-hidden="true">
+	<rect width="160" height="100" fill="#141210"/>
+	<g stroke="#c9a962" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		<!-- Ground line -->
+		<path d="M12 78h136" opacity="0.35"/>
+		<!-- Body -->
+		<path fill="#1a1814" d="M28 76V52l14-18h38l10 10h32l8 8v24H28z"/>
+		<path d="M28 76V52l14-18h38l10 10h32l8 8v24"/>
+		<!-- Cabin / roof -->
+		<path d="M44 52V38l12-8h28l8 8v14"/>
+		<!-- Wheels -->
+		<circle cx="48" cy="76" r="9" fill="#0c0b09" stroke="#c9a962"/>
+		<circle cx="118" cy="76" r="9" fill="#0c0b09" stroke="#c9a962"/>
+		<circle cx="48" cy="76" r="3" fill="#c9a962" opacity="0.4"/>
+		<circle cx="118" cy="76" r="3" fill="#c9a962" opacity="0.4"/>
+		<!-- Window hint -->
+		<path d="M52 50h24" opacity="0.45" stroke-width="1.5"/>
+	</g>
+</svg>

@@ -1,0 +1,187 @@
+---
+import { BOOKS } from '../data/books';
+import { BOOK_SHELVES } from '../data/books';
+
+/** One recognizable cover per shelf for the hero mosaic. */
+const mosaicByShelf = BOOK_SHELVES.map((shelf) => BOOKS.find((b) => b.shelf === shelf.id)).filter(
+	(b): b is (typeof BOOKS)[number] => Boolean(b)
+);
+
+const count = BOOKS.length;
+const shelfCount = BOOK_SHELVES.length;
+---
+
+<div class="bookshelf-hero relative overflow-hidden px-4 pb-8 pt-2 md:px-6 md:pb-10">
+	<div class="bookshelf-hero-mosaic pointer-events-none absolute inset-0" aria-hidden="true">
+		{
+			mosaicByShelf.map((book, i) => (
+				<div class="bookshelf-hero-cover" style={`--hero-i: ${i}`}>
+					<img src={book.coverSrc} alt="" width="120" height="180" loading="eager" decoding="async" />
+				</div>
+			))
+		}
+	</div>
+	<div class="bookshelf-hero-vignette pointer-events-none absolute inset-0" aria-hidden="true" />
+	<div class="relative mx-auto max-w-3xl text-center">
+		<p class="font-caveat text-lg text-site-muted md:text-xl">
+			<a href="/" class="text-site-gold underline-offset-4 transition-colors hover:underline">
+				Home
+			</a>
+			<span aria-hidden="true"> · </span>
+			<span class="text-site-ink">Bookshelf</span>
+		</p>
+		<h1 class="mt-4 font-caveat text-3xl font-semibold tracking-tight text-site-gold md:text-4xl">
+			A few books on my virtual bookshelf
+		</h1>
+		<p class="mt-4 font-caveat text-xl leading-relaxed text-site-muted md:text-2xl">
+			One of my favorite things to do is listen to productivity and self help books, grouped here by theme.
+		</p>
+		<p class="mt-3 font-mono text-[0.68rem] uppercase tracking-[0.28em] text-site-muted/90 md:text-[0.72rem]">
+			{count} titles · {shelfCount} shelves
+		</p>
+	</div>
+</div>
+
+<style>
+	.bookshelf-hero-mosaic {
+		display: grid;
+		place-items: center;
+		opacity: 0.42;
+		mask-image: radial-gradient(ellipse 85% 70% at 50% 40%, black 20%, transparent 72%);
+	}
+
+	.bookshelf-hero-cover {
+		position: absolute;
+		width: clamp(3.5rem, 8vw, 5.5rem);
+		aspect-ratio: 2 / 3;
+		border-radius: 2px;
+		overflow: hidden;
+		box-shadow:
+			0 8px 24px rgba(0, 0, 0, 0.45),
+			0 0 0 1px rgba(201, 169, 98, 0.15);
+		animation: hero-cover-float-1 8s ease-in-out infinite;
+		animation-delay: calc(var(--hero-i) * -0.65s);
+	}
+
+	.bookshelf-hero-cover:nth-child(1) {
+		left: 8%;
+		top: 12%;
+		transform: rotate(-18deg);
+	}
+	.bookshelf-hero-cover:nth-child(2) {
+		left: 22%;
+		top: 4%;
+		transform: rotate(-8deg);
+	}
+	.bookshelf-hero-cover:nth-child(3) {
+		right: 20%;
+		top: 8%;
+		transform: rotate(6deg);
+	}
+	.bookshelf-hero-cover:nth-child(4) {
+		right: 6%;
+		top: 18%;
+		transform: rotate(14deg);
+	}
+	.bookshelf-hero-cover:nth-child(5) {
+		left: 4%;
+		bottom: 18%;
+		transform: rotate(-12deg);
+	}
+	.bookshelf-hero-cover:nth-child(6) {
+		right: 8%;
+		bottom: 12%;
+		transform: rotate(10deg);
+	}
+
+	.bookshelf-hero-cover img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.bookshelf-hero-vignette {
+		background: radial-gradient(ellipse 90% 80% at 50% 45%, transparent 35%, var(--color-site-cream) 88%);
+	}
+
+
+	.bookshelf-hero-cover:nth-child(1) {
+		animation-name: hero-cover-float-1;
+	}
+	.bookshelf-hero-cover:nth-child(2) {
+		animation-name: hero-cover-float-2;
+	}
+	.bookshelf-hero-cover:nth-child(3) {
+		animation-name: hero-cover-float-3;
+	}
+	.bookshelf-hero-cover:nth-child(4) {
+		animation-name: hero-cover-float-4;
+	}
+	.bookshelf-hero-cover:nth-child(5) {
+		animation-name: hero-cover-float-5;
+	}
+	.bookshelf-hero-cover:nth-child(6) {
+		animation-name: hero-cover-float-6;
+	}
+
+	@keyframes hero-cover-float-1 {
+		0%,
+		100% {
+			transform: rotate(-18deg);
+		}
+		50% {
+			transform: rotate(-16deg) translateY(-4px);
+		}
+	}
+	@keyframes hero-cover-float-2 {
+		0%,
+		100% {
+			transform: rotate(-8deg);
+		}
+		50% {
+			transform: rotate(-6deg) translateY(-4px);
+		}
+	}
+	@keyframes hero-cover-float-3 {
+		0%,
+		100% {
+			transform: rotate(6deg);
+		}
+		50% {
+			transform: rotate(8deg) translateY(-4px);
+		}
+	}
+	@keyframes hero-cover-float-4 {
+		0%,
+		100% {
+			transform: rotate(14deg);
+		}
+		50% {
+			transform: rotate(16deg) translateY(-4px);
+		}
+	}
+	@keyframes hero-cover-float-5 {
+		0%,
+		100% {
+			transform: rotate(-12deg);
+		}
+		50% {
+			transform: rotate(-10deg) translateY(-4px);
+		}
+	}
+	@keyframes hero-cover-float-6 {
+		0%,
+		100% {
+			transform: rotate(10deg);
+		}
+		50% {
+			transform: rotate(12deg) translateY(-4px);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.bookshelf-hero-cover {
+			animation: none;
+		}
+	}
+</style>

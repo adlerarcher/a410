@@ -1,0 +1,5 @@
+# https://helloadler.com — Adler Archer gateway (GitHub Pages)
+User-agent: *
+Allow: /
+
+Sitemap: https://helloadler.com/sitemap-index.xml

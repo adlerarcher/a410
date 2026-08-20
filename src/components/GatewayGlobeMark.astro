@@ -1,0 +1,22 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = 'h-5 w-5' } = Astro.props;
+---
+
+<svg
+	class:list={[className]}
+	viewBox="0 0 24 24"
+	fill="none"
+	stroke="currentColor"
+	stroke-linecap="round"
+	stroke-linejoin="round"
+	aria-hidden="true"
+>
+	<circle cx="12" cy="12" r="8.75" stroke-width="1.35" />
+	<ellipse cx="12" cy="12" rx="8.75" ry="3.25" stroke-width="1" opacity="0.72" />
+	<ellipse cx="12" cy="12" rx="3.25" ry="8.75" stroke-width="1" opacity="0.72" />
+	<ellipse cx="12" cy="12" rx="8.75" ry="3.75" stroke-width="0.85" opacity="0.38" transform="rotate(32 12 12)" />
+</svg>
