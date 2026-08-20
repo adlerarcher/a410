@@ -1,55 +1,35 @@
 ---
-import SocialLinks from './SocialLinks.astro';
-import GatewayGlobeMark from './GatewayGlobeMark.astro';
-
 interface Props {
-	variant?: 'default' | 'workshop';
 	overlay?: boolean;
 }
 
-const { variant = 'default', overlay = false } = Astro.props;
-
-const wordmarkClass =
-	variant === 'workshop'
-		? 'nav-brand-wordmark font-major-mono text-lg sm:text-xl text-workshop-accent'
-		: 'nav-brand-wordmark font-major-mono text-aa-gold-500 text-lg sm:text-xl';
-
-const markClass =
-	variant === 'workshop'
-		? 'text-workshop-muted transition-colors group-hover:text-workshop-ink'
-		: 'text-site-muted transition-colors group-hover:text-aa-gold-500';
+const { overlay = false } = Astro.props;
 ---
 
 <header
 	class:list={[
-		'z-50 overflow-visible',
-		overlay ? 'absolute inset-x-0 top-0 border-none bg-transparent' : 'relative border-b border-site-border bg-site-cream/90',
-		variant === 'workshop' && !overlay && 'border-workshop-border bg-workshop-paper/90'
+		'z-50',
+		overlay ? 'absolute inset-x-0 top-0 border-none bg-transparent' : 'relative border-b border-site-border bg-site-cream/90'
 	]}
 >
-	<div class="mx-auto flex max-w-5xl items-center justify-between gap-6 px-6 py-5 backdrop-blur-[2px]">
+	<div class="mx-auto flex max-w-5xl items-center justify-between gap-6 px-6 py-5">
 		<a
 			href="/"
-			class="nav-brand-link group inline-flex shrink-0 items-center gap-2.5 transition-opacity hover:opacity-95 sm:gap-3"
-			aria-label="Adler Archer"
+			class="group inline-flex shrink-0 items-center gap-3 transition-opacity hover:opacity-95"
+			aria-label="AI410 home"
 		>
-			{variant === 'default' && (
-				<GatewayGlobeMark class:list={['h-7 w-7 shrink-0 sm:h-8 sm:w-8', markClass]} />
-			)}
-			<span class={wordmarkClass} aria-hidden="true">Adler ArcHer</span>
+			<img
+				src="/images/ai410-mark.svg"
+				alt=""
+				width="36"
+				height="36"
+				class="h-8 w-8 sm:h-9 sm:w-9"
+				decoding="async"
+			/>
+			<span class="font-display text-xl font-semibold tracking-tight text-site-gold sm:text-2xl">AI410</span>
 		</a>
-		<nav aria-label="Social" class="min-w-0">
-			<SocialLinks variant={variant} overlay={overlay} />
-		</nav>
+		<p class="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-site-muted sm:block">
+			AI explained like you are 10
+		</p>
 	</div>
 </header>
-
-<style is:global>
-	.nav-brand-link .nav-brand-wordmark {
-		font-family: var(--font-major-mono) !important;
-		font-weight: 400;
-		font-style: normal;
-		font-synthesis: none;
-		letter-spacing: 0.04em;
-	}
-</style>

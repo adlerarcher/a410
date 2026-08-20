@@ -1,8 +1,8 @@
-# helloadler.com (`ha-site`)
+# AI410 (`a410`)
 
-Gateway and orientation site for the Adler Archer ecosystem (Astro, Tailwind CSS). Deployed to GitHub Pages with custom domain `helloadler.com`.
+Website for **www.ai410.org** — artificial intelligence explained for adults like they are 10 years old.
 
-The writing corpus lives at [adlerarcher.com](https://adlerarcher.com) — a separate site.
+Built with Astro + Tailwind. Scaffolded from the helloadler.com gateway stack.
 
 ## Local development
 
@@ -16,8 +16,8 @@ npm run dev
 GitHub Actions (`.github/workflows/deploy.yml`) builds on push to `main` and deploys to GitHub Pages.
 
 1. Enable GitHub Pages → Source: **GitHub Actions**
-2. Set custom domain to `helloadler.com` in repository Settings → Pages
-3. Point apex DNS for `helloadler.com` to GitHub Pages; `public/CNAME` contains `helloadler.com`
+2. Set custom domain to `www.ai410.org` in repository Settings → Pages
+3. Point DNS for `www.ai410.org` (and optionally apex `ai410.org`) to GitHub Pages; `public/CNAME` contains `www.ai410.org`
 
 ## Coming-soon mode
 
