@@ -1,0 +1,20 @@
+{
+  "number": "05",
+  "slug": "there-is-no-cloud",
+  "title": "There is no cloud, there is a building",
+  "blurb": "Rows of machines in a warehouse, next to a lot of electricity.",
+  "paras": [
+    {
+      "kid": "There is no cloud. There is a building. Rows of machines in a warehouse, in a place chosen because the electricity is cheap and there is enough of it, running hot enough that a large part of the building exists only to carry the heat away.",
+      "grown": "Inference runs on accelerator clusters in physical facilities. Siting is driven by power availability, transmission interconnection timelines, land, and cooling. A meaningful share of capital and floor space goes to power delivery and thermal management rather than compute."
+    },
+    {
+      "kid": "Every question you type is a few seconds of that building, and someone is paying for those seconds. One question is nothing. Everyone asking all day is a real amount of a city's power, which is why these buildings are now an argument in places that have never thought about them before.",
+      "grown": "Per-query energy is small; aggregate load is not. Data center demand has become a live variable in utility resource planning and interconnection queues, which is what turns a siting decision into a local political question about rates, water, and land use."
+    },
+    {
+      "kid": "The building has to be built first, and buildings that need that much power take years. The machines arrive fast. The power line does not.",
+      "grown": "The binding constraint is rarely chips. It is firm power and interconnection, both of which run on multi-year timelines that do not compress to match hardware refresh cycles or demand forecasts."
+    }
+  ]
+}

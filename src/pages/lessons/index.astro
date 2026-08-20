@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const modules = import.meta.glob('../../data/lessons/*.json', { eager: true });
+const lessons = Object.values(modules)
+  .map((m) => m.default ?? m)
+  .sort((a, b) => a.number.localeCompare(b.number));
+---
+<Base title="Lessons — AI410" description="Notes on AI in small words, and in the terms you will see elsewhere.">
+  <header class="masthead compact">
+    <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Lessons</p>
+    <h1>Lessons</h1>
+    <p class="dek">Two versions of each: the small-words one I needed first, and the usual terms so I can recognize them later.</p>
+
+    <div class="toolbar">
+      <div class="switch">
+        <p>Version</p>
+        <button class="toggle" id="toggle" aria-pressed="false">
+          <span data-on="kid">Plain words</span><span data-on="grown">Technical</span>
+        </button>
+      </div>
+      <div class="switch">
+        <p>Show as</p>
+        <button class="toggle" id="view" aria-pressed="false">
+          <span data-on="list">List</span><span data-on="cards">Cards</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="contents">
+      {lessons.map((lesson) => (
+        <a class="entry" href={`/lessons/${lesson.slug}/`}>
+          <span class="num">{lesson.number}</span>
+          <div>
+            <h2>{lesson.title}</h2>
+            <p>{lesson.blurb}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="deck">
+      {lessons.map((lesson) => (
+        <article
+          class="flash"
+          data-flash
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          aria-label={`Flash card: ${lesson.title}. Click to flip.`}
+        >
+          <div class="flash-inner">
+            <div class="flash-face flash-front">
+              <span class="num">{lesson.number}</span>
+              <h2>{lesson.title}</h2>
+              <p class="flash-hint">Flip</p>
+            </div>
+            <div class="flash-face flash-back">
+              <p class="swap" data-kid={lesson.paras?.[0]?.kid ?? lesson.blurb} data-grown={lesson.paras?.[0]?.grown ?? lesson.blurb}>
+                {lesson.paras?.[0]?.kid ?? lesson.blurb}
+              </p>
+            </div>
+          </div>
+          <a class="flash-open" href={`/lessons/${lesson.slug}/`}>Open lesson</a>
+        </article>
+      ))}
+    </div>
+  </main>
+</Base>

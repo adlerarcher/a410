@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const modules = import.meta.glob('../../data/lessons/*.json', { eager: true });
+  const lessons = Object.values(modules)
+    .map((m) => m.default ?? m)
+    .sort((a, b) => a.number.localeCompare(b.number));
+
+  return lessons.map((lesson, i) => ({
+    params: { slug: lesson.slug },
+    props: {
+      lesson,
+      prev: lessons[i - 1] ?? null,
+      next: lessons[i + 1] ?? null
+    }
+  }));
+}
+
+const { lesson, prev, next } = Astro.props;
+---
+<Base title={`${lesson.title} — AI for 10 Year Olds`} description={lesson.blurb}>
+  <header class="masthead compact">
+    <p class="tag"><a href="/lessons/">Lessons</a> &nbsp;/&nbsp; Lesson {lesson.number}</p>
+    <h1>{lesson.title}</h1>
+
+    <div class="switch">
+      <p>Version</p>
+      <button class="toggle" id="toggle" aria-pressed="false">
+        <span data-on="kid">Plain words</span><span data-on="grown">Technical</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="lesson-body">
+    {lesson.paras.map((p) => (
+      <p class="swap" data-kid={p.kid} data-grown={p.grown}>{p.kid}</p>
+    ))}
+
+    <nav class="pager">
+      {prev && (
+        <a class="prev" href={`/lessons/${prev.slug}/`}>
+          <span>Back</span>{prev.title}
+        </a>
+      )}
+      {next && (
+        <a class="next" href={`/lessons/${next.slug}/`}>
+          <span>Next</span>{next.title}
+        </a>
+      )}
+    </nav>
+  </main>
+</Base>

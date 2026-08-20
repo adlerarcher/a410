@@ -1,23 +1,34 @@
-# AI410 (`a410`)
+# ai410.org
 
-Website for **www.ai410.org** — artificial intelligence explained for adults like they are 10 years old.
+Static Astro site. Every lesson is one JSON file.
 
-Built with Astro + Tailwind. Scaffolded from the helloadler.com gateway stack.
+## Add a lesson
 
-## Local development
+Drop a file in `src/data/lessons/`, named `NN-slug.json`:
+
+```json
+{
+  "number": "09",
+  "slug": "your-slug",
+  "title": "Headline in plain words",
+  "blurb": "One line for the contents page.",
+  "paras": [
+    { "kid": "The small-words version.", "grown": "The jargon version of the same claim." }
+  ]
+}
+```
+
+Ordering, the contents page, the URL, and the back/next links all follow from `number` and `slug`. Nothing else to touch.
+
+Glossary terms live in `src/data/glossary.json`.
+
+## Run
 
 ```bash
 npm install
 npm run dev
+npm run build
 ```
-
-## Deploy
-
-GitHub Actions (`.github/workflows/deploy.yml`) builds on push to `main` and deploys to GitHub Pages.
-
-1. Enable GitHub Pages → Source: **GitHub Actions**
-2. Set custom domain to `www.ai410.org` in repository Settings → Pages
-3. Point DNS for `www.ai410.org` (and optionally apex `ai410.org`) to GitHub Pages; `public/CNAME` contains `www.ai410.org`
 
 ## Coming-soon mode
 
@@ -25,3 +36,7 @@ GitHub Actions (`.github/workflows/deploy.yml`) builds on push to `main` and dep
 PUBLIC_UNDER_CONSTRUCTION=true npm run dev
 PUBLIC_UNDER_CONSTRUCTION=true npm run build
 ```
+
+## Deploy
+
+Push to `main`. The workflow in `.github/workflows/deploy.yml` builds and publishes to GitHub Pages. `public/CNAME` holds the domain. Set the apex A and AAAA records as with the other domains, then enable Enforce HTTPS.

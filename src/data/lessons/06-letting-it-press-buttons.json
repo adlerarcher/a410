@@ -1,0 +1,20 @@
+{
+  "number": "06",
+  "slug": "letting-it-press-buttons",
+  "title": "Letting it press buttons",
+  "blurb": "A common way to connect models to other software, and what changes when a guess can become an action.",
+  "paras": [
+    {
+      "kid": "On its own it can only talk. It cannot see your calendar or open your files. To do anything, it has to be handed a way to reach the other software, and for a while every one of those connections was built by hand, one at a time, in a slightly different shape.",
+      "grown": "A model without tools produces text and nothing else. Early integrations were bespoke: each application exposed its own interface, so every model-to-tool pairing was custom work that had to be maintained separately."
+    },
+    {
+      "kid": "MCP is an agreement about the shape of the plug. If your calendar and your files and your database all offer the same kind of socket, then anything that speaks it can plug in, and nobody has to build a new wire for every pair. It is a standard, not a product.",
+      "grown": "The Model Context Protocol is an open standard for how models discover and call external tools and data sources. It replaces per-integration glue with one interface on each side, so tool servers and model clients can be developed independently."
+    },
+    {
+      "kid": "Once it can press buttons instead of only talk, a wrong guess is no longer just a wrong sentence. It can become a wrong action: a message sent, a record changed. The useful questions are what it was allowed to touch, and whether anyone can see afterwards what it did.",
+      "grown": "Tool access moves the error surface from text to side effects. The governing questions become authorization scope, least privilege, human confirmation on irreversible actions, and audit. These are access control problems, not model quality problems."
+    }
+  ]
+}

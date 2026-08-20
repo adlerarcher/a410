@@ -1,0 +1,166 @@
+---
+import '../styles/global.css';
+
+const {
+  title,
+  description = "Notes on AI in small words. Written because the jargon kept needing a 10-year-old version."
+} = Astro.props;
+const year = new Date().getFullYear();
+const path = Astro.url.pathname;
+const onHome = path === '/';
+const onWho = path.startsWith('/who');
+const onWords = path.startsWith('/glossary');
+const onLessons = path.startsWith('/lessons');
+const onMemes = path.startsWith('/memes');
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Adler Archer" />
+  <link rel="icon" type="image/svg+xml" href="/images/ai410-mark.svg" />
+  <link rel="me" href="https://adlerarcher.com/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class:list={[onHome && 'home']}>
+  <div class="wrap">
+    <div class="topline">
+      <a class:list={['homechip', onHome && 'is-on']} href="/" aria-label="AI410 home">
+        <img src="/images/ai410-mark.svg" alt="" width="28" height="28" />
+        ai410
+      </a>
+      <nav class="menu" aria-label="Site">
+        <a
+          class:list={['tab', 'tab-a', onLessons && 'is-on']}
+          href="/lessons/"
+          aria-current={onLessons ? 'page' : undefined}
+        >
+          <span class="tab-mark" aria-hidden="true">★</span>
+          Lessons
+        </a>
+        <a
+          class:list={['tab', 'tab-b', onWords && 'is-on']}
+          href="/glossary/"
+          aria-current={onWords ? 'page' : undefined}
+        >
+          <span class="tab-mark" aria-hidden="true">abc</span>
+          Words
+        </a>
+        <a
+          class:list={['tab', 'tab-d', onMemes && 'is-on']}
+          href="/memes/"
+          aria-current={onMemes ? 'page' : undefined}
+        >
+          <span class="tab-mark" aria-hidden="true">ha</span>
+          Memes
+        </a>
+        <a
+          class:list={['tab', 'tab-c', onWho && 'is-on']}
+          href="/who/"
+          aria-current={onWho ? 'page' : undefined}
+        >
+          <span class="tab-mark" aria-hidden="true">→</span>
+          Who wrote this
+        </a>
+      </nav>
+    </div>
+    <slot />
+    <footer>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/lessons/">Lessons</a>
+        <a href="/glossary/">Glossary</a>
+        <a href="/memes/">Memes</a>
+        <a href="/who/">Who wrote this</a>
+      </nav>
+      <p class="footer-copyright">© {year} Adler Archer. AI410.</p>
+    </footer>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var KEY = 'ai410-mode';
+      var VIEW = 'ai410-view';
+      var stored = null;
+      var storedView = null;
+      try {
+        stored = window.localStorage.getItem(KEY);
+        storedView = window.localStorage.getItem(VIEW);
+      } catch (e) {}
+      var grown = stored === 'grown';
+      var cards = storedView === 'cards';
+
+      function paint(animate) {
+        var swaps = document.querySelectorAll('.swap');
+        function apply() {
+          swaps.forEach(function (el) {
+            var next = grown ? el.dataset.grown : el.dataset.kid;
+            if (next) el.textContent = next;
+          });
+          document.body.classList.toggle('grown-mode', grown);
+          document.body.classList.remove('swapping');
+        }
+        if (animate) {
+          document.body.classList.add('swapping');
+          setTimeout(apply, 160);
+        } else {
+          apply();
+        }
+      }
+
+      function wire() {
+        var btn = document.getElementById('toggle');
+        if (btn) {
+          btn.setAttribute('aria-pressed', String(grown));
+          btn.addEventListener('click', function () {
+            grown = !grown;
+            btn.setAttribute('aria-pressed', String(grown));
+            try { window.localStorage.setItem(KEY, grown ? 'grown' : 'kid'); } catch (e) {}
+            paint(true);
+          });
+        }
+        if (grown) paint(false);
+
+        var viewBtn = document.getElementById('view');
+        if (viewBtn) {
+          viewBtn.setAttribute('aria-pressed', String(cards));
+          document.body.classList.toggle('cards-on', cards);
+          viewBtn.addEventListener('click', function () {
+            cards = !cards;
+            viewBtn.setAttribute('aria-pressed', String(cards));
+            document.body.classList.toggle('cards-on', cards);
+            try { window.localStorage.setItem(VIEW, cards ? 'cards' : 'list'); } catch (e) {}
+          });
+        }
+
+        document.querySelectorAll('[data-flash]').forEach(function (card) {
+          function flip() {
+            var on = card.classList.toggle('is-flipped');
+            card.setAttribute('aria-pressed', String(on));
+          }
+          card.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            flip();
+          });
+          card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              flip();
+            }
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', wire);
+      } else {
+        wire();
+      }
+    })();
+  </script>
+</body>
+</html>

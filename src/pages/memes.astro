@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import memes from '../data/memes.json';
+---
+<Base title="Memes — AI410" description="One-liners that did more than another paragraph.">
+  <header class="masthead compact">
+    <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Memes</p>
+    <h1>Memes</h1>
+    <p class="dek">Sometimes a one-liner did more than another paragraph. These are the ones I kept. Not borrowed pictures. Just the jokes, on paper.</p>
+  </header>
+
+  <main>
+    <div class="meme-wall">
+      {memes.map((meme, i) => (
+        <figure class={`meme meme-${(i % 4) + 1}`}>
+          <p class="meme-line">{meme.line}</p>
+          <p class="meme-note">{meme.note}</p>
+        </figure>
+      ))}
+    </div>
+  </main>
+</Base>

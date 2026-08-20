@@ -1,115 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import UnderConstruction from '../components/UnderConstruction.astro';
-import { siteUnderConstruction } from '../site-flags';
-import { SITE_HOME_DESCRIPTION, SITE_HOME_TITLE, SITE_TAGLINE } from '../data/site-meta';
+import Base from '../layouts/Base.astro';
 ---
-
-<BaseLayout
-	title={siteUnderConstruction ? 'Coming soon · AI410' : SITE_HOME_TITLE}
-	description={siteUnderConstruction ? 'AI410 is getting ready.' : SITE_HOME_DESCRIPTION}
->
-	{
-		siteUnderConstruction ? (
-			<UnderConstruction />
-		) : (
-			<div class="relative isolate flex min-h-screen flex-col overflow-hidden bg-site-cream">
-				<div class="ai410-atmosphere" aria-hidden="true"></div>
-				<Nav overlay />
-				<main class="relative z-[1] flex flex-1 flex-col">
-					<section class="relative flex min-h-[100svh] flex-col justify-end px-6 pb-16 pt-28 sm:pb-20 sm:pt-32">
-						<div class="mx-auto w-full max-w-4xl">
-							<p class="font-display text-5xl font-semibold tracking-tight text-site-gold sm:text-7xl md:text-8xl">
-								AI410
-							</p>
-							<h1 class="mt-6 max-w-2xl font-display text-3xl font-semibold leading-tight text-site-ink sm:text-4xl md:text-5xl">
-								{SITE_TAGLINE}
-							</h1>
-							<p class="mt-5 max-w-xl font-serif text-lg leading-relaxed text-site-muted sm:text-xl">
-								Big AI ideas in plain language for grown-ups. No buzzwords. No fog. Just the kind of
-								explanations that finally click.
-							</p>
-							<div class="mt-10 flex flex-wrap items-center gap-4">
-								<a
-									href="#how"
-									class="inline-flex items-center justify-center border border-site-gold/50 bg-site-gold/15 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-site-gold transition hover:bg-site-gold/25"
-								>
-									See how it works
-								</a>
-							</div>
-						</div>
-					</section>
-
-					<section id="how" class="relative border-t border-site-border px-6 py-20 sm:py-28">
-						<div class="mx-auto max-w-4xl">
-							<h2 class="font-display text-3xl font-semibold text-site-ink sm:text-4xl">
-								Why “like you are 10”?
-							</h2>
-							<p class="mt-5 max-w-2xl font-serif text-lg leading-relaxed text-site-muted">
-								Ten-year-olds ask the real questions. What is it? Why does it matter? What can go wrong?
-								AI410 answers those for adults who are smart — and tired of being talked past.
-							</p>
-							<ul class="mt-12 grid gap-8 sm:grid-cols-3">
-								<li>
-									<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-site-horizon">01</p>
-									<h3 class="mt-3 font-display text-xl text-site-ink">Start simple</h3>
-									<p class="mt-2 font-serif text-base leading-relaxed text-site-muted">
-										One idea at a time. Short words. Clear pictures in your head.
-									</p>
-								</li>
-								<li>
-									<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-site-horizon">02</p>
-									<h3 class="mt-3 font-display text-xl text-site-ink">Then go deeper</h3>
-									<p class="mt-2 font-serif text-base leading-relaxed text-site-muted">
-										Once it clicks, we add the useful detail — still without the fog.
-									</p>
-								</li>
-								<li>
-									<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-site-horizon">03</p>
-									<h3 class="mt-3 font-display text-xl text-site-ink">Stay honest</h3>
-									<p class="mt-2 font-serif text-base leading-relaxed text-site-muted">
-										What AI can do, what it can’t, and when you should be careful.
-									</p>
-								</li>
-							</ul>
-						</div>
-					</section>
-				</main>
-				<Footer transparent />
-			</div>
-		)
-	}
-</BaseLayout>
-
-<style>
-	.ai410-atmosphere {
-		pointer-events: none;
-		position: absolute;
-		inset: 0;
-		z-index: 0;
-		background:
-			radial-gradient(ellipse 80% 55% at 15% 20%, rgba(224, 152, 64, 0.16), transparent 55%),
-			radial-gradient(ellipse 70% 50% at 85% 10%, rgba(90, 159, 176, 0.12), transparent 50%),
-			radial-gradient(ellipse 90% 60% at 50% 100%, rgba(201, 169, 98, 0.08), transparent 55%),
-			linear-gradient(165deg, #0a1424 0%, #122038 48%, #0a1424 100%);
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		.ai410-atmosphere {
-			animation: ai410-atmosphere-drift 18s ease-in-out infinite alternate;
-		}
-	}
-
-	@keyframes ai410-atmosphere-drift {
-		from {
-			filter: hue-rotate(0deg) saturate(1);
-			transform: scale(1);
-		}
-		to {
-			filter: hue-rotate(8deg) saturate(1.08);
-			transform: scale(1.03);
-		}
-	}
-</style>
+<Base title="AI410 | AI, explained like you're 10">
+  <header class="masthead home-hero">
+    <div class="home-stage" aria-hidden="true">
+      <span class="orbit orbit-a"></span>
+      <span class="orbit orbit-b"></span>
+      <span class="orbit orbit-c"></span>
+      <span class="scrap scrap-num scrap-1 float-a">05</span>
+      <span class="scrap scrap-num scrap-2 float-b">06</span>
+      <span class="scrap scrap-sticky scrap-3 float-c">10</span>
+      <span class="scrap scrap-4 float-d">MCP</span>
+      <span class="scrap scrap-5 float-e">the building</span>
+      <img class="scrap scrap-stamp scrap-6 float-f" src="/images/ai410-mark.svg" alt="" width="56" height="56" />
+      <span class="doodle doodle-star">★</span>
+      <span class="doodle doodle-star doodle-star-2">★</span>
+      <svg class="doodle doodle-scribble" viewBox="0 0 120 36" fill="none">
+        <path d="M4 22c18-16 28 14 46 2 16-10 22 12 42-4 12-10 22 6 24 8" />
+      </svg>
+    </div>
+    <p class="kicker reveal">Notes</p>
+    <h1 class="reveal delay-1">AI, explained like you're <span class="flip">10</span>.</h1>
+    <p class="byline reveal delay-2">By <a href="/who/">Adler Archer</a></p>
+    <p class="dek reveal delay-3">I work around this subject and still get stuck on the jargon. I used to paste the words into a chat and ask it to explain them like I was 10. These pages are that habit, written down, with the usual terms next to the small ones.</p>
+    <p class="home-go reveal delay-4">
+      <a href="/lessons/">Lessons</a>
+    </p>
+  </header>
+</Base>

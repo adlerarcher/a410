@@ -1,0 +1,15 @@
+[
+  { "term": "model", "gloss": "The guessing machine itself. The file, not the website." },
+  { "term": "training", "gloss": "The very long, very expensive part where it learned to guess. Already over by the time you type anything." },
+  { "term": "inference", "gloss": "The part that happens when you actually use it. Cheap once, enormous in bulk." },
+  { "term": "token", "gloss": "A chunk of a word. It guesses these, not whole words." },
+  { "term": "hallucination", "gloss": "Made it up. Sounded fine. Same machinery as a correct answer." },
+  { "term": "context window", "gloss": "How much it can hold in its head at once. Past the edge, it forgets." },
+  { "term": "fine-tuning", "gloss": "Extra practice on one narrow kind of thing, after the main learning is done." },
+  { "term": "MCP", "gloss": "An agreed shape of plug, so any tool and any model can connect without custom wiring for every pair." },
+  { "term": "tool call", "gloss": "The moment it stops talking and presses a button in something else." },
+  { "term": "agent", "gloss": "The same machine, allowed to press buttons on its own for a while." },
+  { "term": "GPU", "gloss": "The kind of chip it runs on. Fast at doing one small sum a very large number of times." },
+  { "term": "data center", "gloss": "The building. Machines, power, and a lot of equipment whose only job is moving heat outside." },
+  { "term": "interconnection", "gloss": "Permission and wire to draw power from the grid. The slow part. Years, not months." }
+]

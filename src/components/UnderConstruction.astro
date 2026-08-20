@@ -1,27 +1,13 @@
 ---
-import Footer from './Footer.astro';
+import Base from '../layouts/Base.astro';
 ---
 
-<div class="flex min-h-screen flex-col">
-	<header class="border-b border-site-border bg-site-cream/90 px-6 py-5 backdrop-blur-sm">
-		<div class="mx-auto flex max-w-5xl justify-center sm:justify-start">
-			<a href="/" class="font-display text-xl font-semibold tracking-tight text-site-gold">AI410</a>
-		</div>
-	</header>
-	<main
-		class="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center md:py-24"
-		aria-labelledby="uc-heading"
-	>
-		<p class="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-site-muted">www.ai410.org</p>
-		<h1
-			id="uc-heading"
-			class="mt-8 max-w-xl font-display text-[clamp(2rem,5vw,3rem)] font-semibold leading-tight text-site-ink"
-		>
-			Coming soon
-		</h1>
-		<p class="mt-6 max-w-md font-serif text-lg leading-relaxed text-site-muted md:text-xl">
-			AI explained for adults like you are 10. We are still putting the pieces on the table.
+<Base title="Coming soon" description="AI410 is getting ready.">
+	<header class="masthead compact">
+		<p class="tag">ai410.org</p>
+		<h1>Coming soon</h1>
+		<p class="dek">
+			Short lessons about AI in plain language. This site is not ready yet.
 		</p>
-	</main>
-	<Footer />
-</div>
+	</header>
+</Base>

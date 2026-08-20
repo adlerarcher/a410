@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import terms from '../data/glossary.json';
+---
+<Base title="Glossary — AI410" description="Words that needed unpacking.">
+  <header class="masthead compact">
+    <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Glossary</p>
+    <h1>Glossary</h1>
+    <p class="dek">Words that sent me looking, or asking a model to unpack them.</p>
+  </header>
+
+  <main>
+    <dl>
+      {terms.map((t) => (
+        <>
+          <dt>{t.term}</dt>
+          <dd>{t.gloss}</dd>
+        </>
+      ))}
+    </dl>
+  </main>
+</Base>
