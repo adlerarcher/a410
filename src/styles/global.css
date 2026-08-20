@@ -323,6 +323,16 @@ body.home main{margin-top:40px}
 .home-flash .flash-inner{min-height:248px}
 .home-flash .flash-front{align-items:center;text-align:center}
 .cartoon{width:92px;height:92px;display:block;margin:0 auto 4px}
+.home-portrait{
+	display:block;width:92px;height:92px;margin:0 auto 4px;
+	object-fit:cover;object-position:center top;
+	border:2px solid var(--ink);background:var(--card);
+	transform:rotate(-2.2deg);
+}
+.adler-flash h2{
+	font-family:var(--hand);font-weight:700;font-size:26px;
+	letter-spacing:.01em;color:var(--ballpoint);
+}
 @media(max-width:560px){
   .home-deck{grid-template-columns:1fr}
 }

@@ -3,10 +3,32 @@ import Base from '../layouts/Base.astro';
 import Doodle from '../components/Doodle.astro';
 import { SITE_DEFAULT_DESCRIPTION, SITE_HOME_TITLE } from '../data/site-meta';
 
-const modules = import.meta.glob('../data/lessons/*.json', { eager: true });
-const lessons = Object.values(modules)
-	.map((m) => m.default ?? m)
-	.sort((a, b) => a.number.localeCompare(b.number));
+const pages = [
+	{
+		href: '/lessons/',
+		title: 'Lessons',
+		blurb: 'What it knows, what it can read, what it can do.',
+		kind: 'lessons' as const
+	},
+	{
+		href: '/glossary/',
+		title: 'Words',
+		blurb: 'The terms that show up when you try to see how it works.',
+		kind: 'words' as const
+	},
+	{
+		href: '/memes/',
+		title: 'Memes',
+		blurb: 'The same distinctions. Less patient.',
+		kind: 'memes' as const
+	},
+	{
+		href: 'https://adlerarcher.com/',
+		title: 'adlerarcher.com',
+		blurb: 'Essays, notes, bookshelf, parks, and passport.',
+		kind: 'adler' as const
+	}
+];
 ---
 <Base title={`AI410 | ${SITE_HOME_TITLE}`} description={SITE_DEFAULT_DESCRIPTION}>
 	<header class="masthead home-hero">
@@ -37,40 +59,46 @@ const lessons = Object.values(modules)
 				these systems in federal permitting.
 			</p>
 		</div>
-	</header>
 
-	<main class="home-start">
-		<p>
-			A model knows what it read while it was being taught, plus whatever you paste into the chat.
-			It does not know your inbox, your company's records, or what a permitting database says today.
-			Those things were never in the lesson. A fluent answer about them is still a guess.
-		</p>
-		<p>
-			If you want it to see something current, you fetch text and hand it over. Search, a document, a
-			row from a live system. That is retrieval. The model reads what it is given. Nothing is sent,
-			booked, or filed.
-		</p>
-		<p>
-			If you want it to do something, it calls a function that runs somewhere else. That is tool use.
-			A tool can look up which flights are left on Tuesday. It can also book one. Those two sentences
-			feel the same and are not. Doing things has consequences that reading does not, which is why a
-			careful demo is read-only on purpose.
-		</p>
-		<p>
-			MCP, when it shows up, is only the plug on the doing job. It is not the capability. The plug
-			does not decide read versus write. Someone has to.
-		</p>
-
-		<div class="contents">
-			{lessons.map((lesson) => (
-				<a class="entry" href={`/lessons/${lesson.slug}/`}>
-					<span class="num">{lesson.number}</span>
-					<div>
-						<h2>{lesson.title}</h2>
-						<p>{lesson.blurb}</p>
+		<div class="home-deck reveal delay-4">
+			{pages.map((page) => (
+				<article
+					class:list={['flash', 'home-flash', page.kind === 'adler' && 'adler-flash']}
+					data-flash
+					tabindex="0"
+					role="button"
+					aria-pressed="false"
+					aria-label={`${page.title}. Flip for a line, or open the page.`}
+				>
+					<div class="flash-inner">
+						<div class="flash-face flash-front">
+							{page.kind === 'adler' ? (
+								<img
+									class="home-portrait"
+									src="/images/adler-archer-cartoon.png"
+									alt=""
+									width="1024"
+									height="1024"
+								/>
+							) : (
+								<Doodle kind={page.kind} />
+							)}
+							<h2>{page.title}</h2>
+							<p class="flash-hint">Flip</p>
+						</div>
+						<div class="flash-face flash-back">
+							<p>{page.blurb}</p>
+						</div>
 					</div>
-				</a>
+					<a
+						class="flash-open"
+						href={page.href}
+						rel={page.kind === 'adler' ? 'me' : undefined}
+					>
+						Open
+					</a>
+				</article>
 			))}
 		</div>
-	</main>
+	</header>
 </Base>
