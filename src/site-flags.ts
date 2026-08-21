@@ -3,7 +3,7 @@
  * placeholder homepage. Omit or set false for the full site.
  * Example: PUBLIC_UNDER_CONSTRUCTION=true npm run build
  *
- * (Kept out of `config.ts` — that name can confuse Vite/Astro’s module loader in dev.)
+ * (Kept out of `config.ts`; that name can confuse Vite/Astro’s module loader in dev.)
  */
 export const siteUnderConstruction =
 	typeof import.meta.env?.PUBLIC_UNDER_CONSTRUCTION === 'string' &&

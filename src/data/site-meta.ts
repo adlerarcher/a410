@@ -21,9 +21,9 @@ export const PERSON_SAME_AS = [
 ] as const;
 
 export const SITE_DEFAULT_DESCRIPTION =
-	'AI410 — plain-language artificial intelligence explanations by Adler Archer. How AI systems actually work: models, retrieval, tools, provenance, and agency.';
+	'AI410: plain-language artificial intelligence explanations by Adler Archer. How AI systems actually work: models, retrieval, tools, provenance, and agency.';
 
-export const SITE_HOME_TITLE = 'How AI systems actually work — by Adler Archer';
+export const SITE_HOME_TITLE = 'How AI systems actually work, by Adler Archer';
 
 export const SITE_HOME_DESCRIPTION =
 	'Adler Archer explains artificial intelligence in plain language on AI410: what a model knows, what it can retrieve, what tools can do, and the difference between looking something up and acting.';

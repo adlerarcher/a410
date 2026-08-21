@@ -8,7 +8,7 @@ import {
 import { absoluteUrl, buildBreadcrumbSchema } from '../data/seo';
 
 const description =
-	'Adler Archer writes AI410 — plain-language explanations of how artificial intelligence systems actually work.';
+	'Adler Archer built AI410 as a personal site for sharing plain-language explanations of how artificial intelligence systems actually work.';
 
 const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
 const jsonLdExtra = [
@@ -20,7 +20,7 @@ const jsonLdExtra = [
 		'@type': 'ProfilePage',
 		'@id': absoluteUrl('/who/', siteOrigin),
 		url: absoluteUrl('/who/', siteOrigin),
-		name: `Who wrote this — ${SITE_PERSON_NAME}`,
+		name: `Who wrote this: ${SITE_PERSON_NAME}`,
 		description,
 		mainEntity: { '@id': `${siteOrigin}/#person` },
 		about: [
@@ -31,11 +31,14 @@ const jsonLdExtra = [
 	}
 ];
 ---
-<Base title={`Who wrote this — ${SITE_PERSON_NAME} · AI410`} description={description} jsonLdExtra={jsonLdExtra}>
+<Base title={`Who wrote this: ${SITE_PERSON_NAME} · AI410`} description={description} jsonLdExtra={jsonLdExtra}>
   <header class="masthead compact">
     <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Who wrote this</p>
     <h1>Who wrote this</h1>
-    <p class="dek">I am {SITE_PERSON_NAME}. I write the plain-language artificial intelligence notes on AI410.</p>
+    <p class="dek">
+      I am {SITE_PERSON_NAME}. AI410 is a personal site I built to share how artificial intelligence
+      systems actually work, in language that stays clear.
+    </p>
   </header>
 
   <main class="lesson-body">
@@ -45,13 +48,39 @@ const jsonLdExtra = [
     </figure>
 
     <p>
+      By day I work on energy and technology at the U.S. Department of Energy as a Presidential Innovation Fellow,
+      and I teach at Johns Hopkins School of Medicine. That world is full of fluent sentences that are not the same
+      thing as a real record, and of systems that can look something up without being able to file it. Those
+      distinctions show up everywhere AI shows up, which is part of why I wanted a quiet place to write them down.
+    </p>
+    <p>
+      This site is not for that work. It is personal writing I put online so other people can borrow the same
+      mental models. No badge, no agency letterhead, no claim that this is official anything.
+    </p>
+    <p>
       Each lesson has two versions: small words, and the terms you will see elsewhere. The small-words version is
       how I check the idea is actually in hand. It is a method, not a claim about the reader's age.
     </p>
     <p>
-      More about me — essays, bookshelf, parks — lives on my writing site.
+      I was born in the Deep South and raised in Japan. I come from a military family and enlisted in the Air Force
+      at seventeen. My path since then has moved through aerospace, law, health systems, and public service. A
+      question I keep coming back to is how a person stays effective as life gets larger and more complicated. I
+      read a lot. I write when I have thought something through.
     </p>
-    <p>This is personal writing. It is not an official government publication.</p>
+    <p>
+      Away from the desk I hike, visit parks, travel, cook, lift, and sit still when I can. Those habits, plus a
+      bookshelf, live on my writing site.
+    </p>
+    <ul class="interest-row">
+      <li>Hiking</li>
+      <li>Parks</li>
+      <li>Travel</li>
+      <li>Yoga</li>
+      <li>Sushi</li>
+      <li>Cars</li>
+      <li>Wine</li>
+      <li>Board games</li>
+    </ul>
 
     <div class="contents outbound">
       <a class="entry hand" href={PERSON_PRIMARY_URL} rel="me author">

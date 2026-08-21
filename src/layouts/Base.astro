@@ -88,7 +88,7 @@ const schemaGraph = {
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL.href} />
   <meta property="og:image" content={ogImageURL} />
-  <meta property="og:image:alt" content={`${SITE_NAME} — ${SITE_TAGLINE} by ${SITE_PERSON_NAME}`} />
+  <meta property="og:image:alt" content={`${SITE_NAME}: ${SITE_TAGLINE} by ${SITE_PERSON_NAME}`} />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={pageTitle} />
@@ -108,7 +108,7 @@ const schemaGraph = {
 <body class:list={[onHome && 'home', onMemes && 'memes']}>
   <div class="wrap">
     <div class="topline">
-      <a class:list={['homechip', onHome && 'is-on']} href="/" aria-label="AI410 home — artificial intelligence by Adler Archer">
+      <a class:list={['homechip', onHome && 'is-on']} href="/" aria-label="AI410 home, artificial intelligence by Adler Archer">
         <img src="/images/ai410-mark.svg" alt="" width="28" height="28" />
         ai410
       </a>
@@ -157,7 +157,7 @@ const schemaGraph = {
         <a href={PERSON_PRIMARY_URL} rel="me author">Adler Archer</a>
       </nav>
       <p class="footer-copyright">
-        © {year} {SITE_PERSON_NAME}. {SITE_NAME} — plain-language artificial intelligence.
+        © {year} {SITE_PERSON_NAME}. {SITE_NAME}: plain-language artificial intelligence.
       </p>
     </footer>
   </div>

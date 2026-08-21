@@ -27,7 +27,7 @@ const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
 const lessonPath = `/lessons/${lesson.slug}/`;
 const lessonUrl = absoluteUrl(lessonPath, siteOrigin);
 const description = `${lesson.blurb} A plain-language artificial intelligence lesson by Adler Archer on AI410.`;
-const title = `${lesson.title} — AI lesson by Adler Archer · AI410`;
+const title = `${lesson.title}: AI lesson by Adler Archer · AI410`;
 const jsonLdExtra = [
 	buildBreadcrumbSchema(siteOrigin, [
 		{ name: 'AI410', path: '/' },

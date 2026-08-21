@@ -9,7 +9,7 @@ type Block = CopyBlock | MemeBlock;
 
 const feed = items as Block[];
 const description =
-	'Artificial intelligence memes by Adler Archer on AI410 — the same distinctions as the lessons, less patient.';
+	'Artificial intelligence memes by Adler Archer on AI410: the same distinctions as the lessons, less patient.';
 
 const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
 const jsonLdExtra = [
@@ -19,7 +19,7 @@ const jsonLdExtra = [
 	])
 ];
 ---
-<Base title="AI Memes by Adler Archer — AI410" description={description} jsonLdExtra={jsonLdExtra}>
+<Base title="AI Memes by Adler Archer · AI410" description={description} jsonLdExtra={jsonLdExtra}>
   <header class="masthead compact">
     <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Memes</p>
     <h1>Memes</h1>

@@ -4,7 +4,7 @@ import terms from '../data/glossary.json';
 import { buildBreadcrumbSchema } from '../data/seo';
 
 const description =
-	'Artificial intelligence glossary by Adler Archer on AI410 — plain-language definitions of the terms that show up when you try to see how AI systems actually work.';
+	'Artificial intelligence glossary by Adler Archer on AI410: plain-language definitions of the terms that show up when you try to see how AI systems actually work.';
 
 const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
 const jsonLdExtra = [
@@ -27,7 +27,7 @@ const jsonLdExtra = [
 	}
 ];
 ---
-<Base title="AI Glossary by Adler Archer — AI410" description={description} jsonLdExtra={jsonLdExtra}>
+<Base title="AI Glossary by Adler Archer · AI410" description={description} jsonLdExtra={jsonLdExtra}>
   <header class="masthead compact">
     <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Glossary</p>
     <h1>Glossary</h1>

@@ -102,7 +102,7 @@ h1 .flip{background:linear-gradient(transparent 62%,var(--marker) 62% 94%,transp
 .home-start p{margin:0 0 28px}
 .home-start .contents{margin-top:8px}
 
-/* sprawl — taped scraps around the masthead, notebook version of thermal's mosaic */
+/* sprawl: taped scraps around the masthead, notebook version of thermal's mosaic */
 .sprawl{pointer-events:none;position:absolute;inset:-1.5rem -7.5rem auto;height:22rem;z-index:0;display:none}
 .masthead>:not(.sprawl){position:relative;z-index:1}
 .scrap{

@@ -1,4 +1,4 @@
-# https://www.ai410.org — AI410 by Adler Archer
+# https://www.ai410.org · AI410 by Adler Archer
 User-agent: *
 Allow: /
 

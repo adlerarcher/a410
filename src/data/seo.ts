@@ -32,7 +32,7 @@ export function buildPersonSchema(siteOrigin: string) {
 			'plain-language AI education'
 		],
 		description:
-			'Adler Archer writes AI410 — plain-language explanations of how artificial intelligence systems actually work.'
+			'Adler Archer writes AI410, a personal site with plain-language explanations of how artificial intelligence systems actually work.'
 	};
 }
 

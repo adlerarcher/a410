@@ -1,6 +1,6 @@
 # ai410.org
 
-Static Astro site by **Adler Archer** — plain-language **artificial intelligence** explanations. Every lesson is one JSON file.
+Static Astro site by **Adler Archer**: plain-language **artificial intelligence** explanations. Every lesson is one JSON file.
 
 SEO / LLM citation files: `public/llms.txt`, `public/robots.txt`, `public/humans.txt`. Structured data (Person, WebSite, LearningResource) is emitted from `src/layouts/Base.astro` and `src/data/seo.ts`.
 
