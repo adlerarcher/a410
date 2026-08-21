@@ -1,5 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
+import {
+	absoluteUrl,
+	buildBreadcrumbSchema,
+	buildLearningResourceSchema
+} from '../../data/seo';
 
 export async function getStaticPaths() {
   const modules = import.meta.glob('../../data/lessons/*.json', { eager: true });
@@ -18,11 +23,30 @@ export async function getStaticPaths() {
 }
 
 const { lesson, prev, next } = Astro.props;
+const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
+const lessonPath = `/lessons/${lesson.slug}/`;
+const lessonUrl = absoluteUrl(lessonPath, siteOrigin);
+const description = `${lesson.blurb} A plain-language artificial intelligence lesson by Adler Archer on AI410.`;
+const title = `${lesson.title} — AI lesson by Adler Archer · AI410`;
+const jsonLdExtra = [
+	buildBreadcrumbSchema(siteOrigin, [
+		{ name: 'AI410', path: '/' },
+		{ name: 'Lessons', path: '/lessons/' },
+		{ name: lesson.title, path: lessonPath }
+	]),
+	buildLearningResourceSchema({
+		siteOrigin,
+		url: lessonUrl,
+		title: lesson.title,
+		description
+	})
+];
 ---
-<Base title={`${lesson.title} — AI410`} description={lesson.blurb}>
+<Base title={title} description={description} jsonLdExtra={jsonLdExtra}>
   <header class="masthead compact">
     <p class="tag"><a href="/lessons/">Lessons</a> &nbsp;/&nbsp; Lesson {lesson.number}</p>
     <h1>{lesson.title}</h1>
+    <p class="dek">Artificial intelligence · by <a href="/who/">Adler Archer</a></p>
 
     <div class="switch">
       <p>Version</p>

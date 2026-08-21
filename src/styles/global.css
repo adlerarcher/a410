@@ -320,8 +320,23 @@ body.home main{margin-top:40px}
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   gap:28px 18px;margin-top:48px;position:relative;z-index:1;
 }
-.home-flash .flash-inner{min-height:248px}
-.home-flash .flash-front{align-items:center;text-align:center}
+.home-card{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  text-decoration:none;color:inherit;
+  background:var(--card);border:2px solid var(--ink);
+  box-shadow:3px 4px 0 rgba(22,35,43,.08);
+  padding:22px 18px 20px;
+  transform:rotate(-1.2deg);
+}
+.home-card:nth-child(even){transform:rotate(1.2deg)}
+.home-card:hover{background:var(--marker);color:inherit}
+.home-card:focus-visible{outline:3px solid var(--ballpoint);outline-offset:3px}
+.home-card h2{
+  font-family:var(--display);font-weight:600;
+  font-size:22px;line-height:1.2;letter-spacing:-.02em;margin:8px 0 0;
+}
+.home-card p{margin:8px 0 0;font-size:16px;line-height:24px;color:var(--pencil)}
+.home-card:hover p{color:var(--ink)}
 .cartoon{width:92px;height:92px;display:block;margin:0 auto 4px}
 .home-portrait{
 	display:block;width:92px;height:92px;margin:0 auto 4px;

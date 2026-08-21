@@ -1,16 +1,43 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { buildBreadcrumbSchema } from '../../data/seo';
 
 const modules = import.meta.glob('../../data/lessons/*.json', { eager: true });
 const lessons = Object.values(modules)
   .map((m) => m.default ?? m)
   .sort((a, b) => a.number.localeCompare(b.number));
+
+const description =
+	'Artificial intelligence lessons by Adler Archer on AI410: what a model knows, retrieval, tools, MCP, provenance, agency, and where the cloud actually lives.';
+
+const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
+const jsonLdExtra = [
+	buildBreadcrumbSchema(siteOrigin, [
+		{ name: 'AI410', path: '/' },
+		{ name: 'Lessons', path: '/lessons/' }
+	]),
+	{
+		'@type': 'CollectionPage',
+		'@id': `${siteOrigin}/lessons/#collection`,
+		url: `${siteOrigin}/lessons/`,
+		name: 'AI410 Lessons — artificial intelligence by Adler Archer',
+		description,
+		about: { '@type': 'Thing', name: 'artificial intelligence' },
+		author: { '@id': `${siteOrigin}/#person` },
+		isPartOf: { '@id': `${siteOrigin}/#website` },
+		hasPart: lessons.map((lesson) => ({
+			'@type': 'LearningResource',
+			name: lesson.title,
+			url: `${siteOrigin}/lessons/${lesson.slug}/`
+		}))
+	}
+];
 ---
-<Base title="Lessons — AI410" description="What a model knows, what it can read, what it can do, and the difference between looking something up and doing it.">
+<Base title="AI Lessons by Adler Archer — AI410" description={description} jsonLdExtra={jsonLdExtra}>
   <header class="masthead compact">
     <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Lessons</p>
     <h1>Lessons</h1>
-    <p class="dek">What a model knows, what it can read, what it can do, and the difference between looking something up and doing it. Then the building the whole thing runs in.</p>
+    <p class="dek">What a model knows, what it can read, what it can do, and the difference between looking something up and doing it. Then the building the whole thing runs in. Plain-language artificial intelligence by <a href="/who/">Adler Archer</a>.</p>
 
     <div class="toolbar">
       <div class="switch">

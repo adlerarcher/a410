@@ -1,12 +1,37 @@
 ---
 import Base from '../layouts/Base.astro';
 import terms from '../data/glossary.json';
+import { buildBreadcrumbSchema } from '../data/seo';
+
+const description =
+	'Artificial intelligence glossary by Adler Archer on AI410 — plain-language definitions of the terms that show up when you try to see how AI systems actually work.';
+
+const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
+const jsonLdExtra = [
+	buildBreadcrumbSchema(siteOrigin, [
+		{ name: 'AI410', path: '/' },
+		{ name: 'Glossary', path: '/glossary/' }
+	]),
+	{
+		'@type': 'DefinedTermSet',
+		'@id': `${siteOrigin}/glossary/#terms`,
+		url: `${siteOrigin}/glossary/`,
+		name: 'AI410 artificial intelligence glossary',
+		description,
+		author: { '@id': `${siteOrigin}/#person` },
+		hasDefinedTerm: terms.slice(0, 40).map((t) => ({
+			'@type': 'DefinedTerm',
+			name: t.term,
+			description: t.gloss
+		}))
+	}
+];
 ---
-<Base title="Glossary — AI410" description="The terms that show up when you are trying to see how the system actually works.">
+<Base title="AI Glossary by Adler Archer — AI410" description={description} jsonLdExtra={jsonLdExtra}>
   <header class="masthead compact">
     <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Glossary</p>
     <h1>Glossary</h1>
-    <p class="dek">The terms that show up when you are trying to see how the system actually works.</p>
+    <p class="dek">The terms that show up when you are trying to see how an artificial intelligence system actually works. By <a href="/who/">Adler Archer</a>.</p>
   </header>
 
   <main>

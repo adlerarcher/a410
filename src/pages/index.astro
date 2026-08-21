@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Doodle from '../components/Doodle.astro';
-import { SITE_DEFAULT_DESCRIPTION, SITE_HOME_TITLE } from '../data/site-meta';
+import { SITE_HOME_DESCRIPTION, SITE_HOME_TITLE } from '../data/site-meta';
+import { buildBreadcrumbSchema } from '../data/seo';
 
 const pages = [
 	{
@@ -29,8 +30,27 @@ const pages = [
 		kind: 'adler' as const
 	}
 ];
+
+const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
+const jsonLdExtra = [
+	buildBreadcrumbSchema(siteOrigin, [{ name: 'AI410', path: '/' }]),
+	{
+		'@type': 'WebPage',
+		'@id': `${siteOrigin}/#webpage`,
+		url: `${siteOrigin}/`,
+		name: SITE_HOME_TITLE,
+		description: SITE_HOME_DESCRIPTION,
+		isPartOf: { '@id': `${siteOrigin}/#website` },
+		about: [
+			{ '@type': 'Thing', name: 'artificial intelligence' },
+			{ '@type': 'Person', name: 'Adler Archer' }
+		],
+		author: { '@id': `${siteOrigin}/#person` },
+		mainEntity: { '@id': `${siteOrigin}/#person` }
+	}
+];
 ---
-<Base title={`AI410 | ${SITE_HOME_TITLE}`} description={SITE_DEFAULT_DESCRIPTION}>
+<Base title={`AI410 | ${SITE_HOME_TITLE}`} description={SITE_HOME_DESCRIPTION} jsonLdExtra={jsonLdExtra}>
 	<header class="masthead home-hero">
 		<div class="home-stage" aria-hidden="true">
 			<span class="orbit orbit-a"></span>
@@ -51,53 +71,38 @@ const pages = [
 		</div>
 
 		<div class="hero-copy">
-			<p class="kicker reveal">ai410</p>
+			<p class="kicker reveal">ai410 · artificial intelligence</p>
 			<h1 class="reveal delay-1">How AI systems <span class="flip">actually work</span>.</h1>
-			<p class="byline reveal delay-2">By <a href="/who/">Adler Archer</a></p>
+			<p class="byline reveal delay-2">
+				By <a href="/who/">Adler Archer</a> — plain-language artificial intelligence for adults
+			</p>
 			<p class="dek reveal delay-3">
-				Plain-language explanations of the parts that matter, written by someone who builds with
-				these systems in federal permitting.
+				Plain-language explanations of the parts that matter in modern AI systems, written by Adler Archer,
+				who builds with these systems in federal permitting.
 			</p>
 		</div>
 
 		<div class="home-deck reveal delay-4">
 			{pages.map((page) => (
-				<article
-					class:list={['flash', 'home-flash', page.kind === 'adler' && 'adler-flash']}
-					data-flash
-					tabindex="0"
-					role="button"
-					aria-pressed="false"
-					aria-label={`${page.title}. Flip for a line, or open the page.`}
+				<a
+					class:list={['home-card', page.kind === 'adler' && 'adler-flash']}
+					href={page.href}
+					rel={page.kind === 'adler' ? 'me' : undefined}
 				>
-					<div class="flash-inner">
-						<div class="flash-face flash-front">
-							{page.kind === 'adler' ? (
-								<img
-									class="home-portrait"
-									src="/images/adler-archer-cartoon.png"
-									alt=""
-									width="1024"
-									height="1024"
-								/>
-							) : (
-								<Doodle kind={page.kind} />
-							)}
-							<h2>{page.title}</h2>
-							<p class="flash-hint">Flip</p>
-						</div>
-						<div class="flash-face flash-back">
-							<p>{page.blurb}</p>
-						</div>
-					</div>
-					<a
-						class="flash-open"
-						href={page.href}
-						rel={page.kind === 'adler' ? 'me' : undefined}
-					>
-						Open
-					</a>
-				</article>
+					{page.kind === 'adler' ? (
+						<img
+							class="home-portrait"
+							src="/images/adler-archer-cartoon.png"
+							alt=""
+							width="1024"
+							height="1024"
+						/>
+					) : (
+						<Doodle kind={page.kind} />
+					)}
+					<h2>{page.title}</h2>
+					<p>{page.blurb}</p>
+				</a>
 			))}
 		</div>
 	</header>

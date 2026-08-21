@@ -1,0 +1,12 @@
+/* TEAM */
+Creator: Adler Archer
+Site: AI410
+URL: https://www.ai410.org/
+Writing: https://adlerarcher.com/
+Contact: https://www.linkedin.com/in/adlerarcher
+
+/* SITE */
+Standards: HTML5, Astro
+Language: English
+Topic: Artificial intelligence explained in plain language
+Location: United States

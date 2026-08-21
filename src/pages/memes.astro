@@ -1,18 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
 import items from '../data/memes.json';
+import { buildBreadcrumbSchema } from '../data/seo';
 
 type CopyBlock = { type: 'copy'; text: string };
 type MemeBlock = { type: 'meme'; top: string; bottom: string; img: string; alt: string };
 type Block = CopyBlock | MemeBlock;
 
 const feed = items as Block[];
+const description =
+	'Artificial intelligence memes by Adler Archer on AI410 — the same distinctions as the lessons, less patient.';
+
+const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
+const jsonLdExtra = [
+	buildBreadcrumbSchema(siteOrigin, [
+		{ name: 'AI410', path: '/' },
+		{ name: 'Memes', path: '/memes/' }
+	])
+];
 ---
-<Base title="Memes — AI410" description="The same distinctions as the lessons. Less patient.">
+<Base title="AI Memes by Adler Archer — AI410" description={description} jsonLdExtra={jsonLdExtra}>
   <header class="masthead compact">
     <p class="tag"><a href="/">ai410.org</a> &nbsp;/&nbsp; Memes</p>
     <h1>Memes</h1>
-    <p class="dek">The same distinctions as the lessons. Less patient.</p>
+    <p class="dek">The same artificial intelligence distinctions as the lessons. Less patient. By <a href="/who/">Adler Archer</a>.</p>
   </header>
 
   <main class="meme-feed">

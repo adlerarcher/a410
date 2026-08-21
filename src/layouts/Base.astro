@@ -1,10 +1,37 @@
 ---
 import '../styles/global.css';
+import {
+	PERSON_PRIMARY_URL,
+	SITE_DEFAULT_DESCRIPTION,
+	SITE_KEYWORDS,
+	SITE_NAME,
+	SITE_OG_IMAGE,
+	SITE_PERSON_NAME,
+	SITE_TAGLINE
+} from '../data/site-meta';
+import {
+	absoluteUrl,
+	buildPersonSchema,
+	buildWebsiteSchema
+} from '../data/seo';
+
+interface Props {
+	title: string;
+	description?: string;
+	ogImage?: string;
+	/** Extra JSON-LD nodes merged into @graph (Person + WebSite always included). */
+	jsonLdExtra?: Record<string, unknown>[];
+	noindex?: boolean;
+}
 
 const {
-  title,
-  description = "Plain-language explanations of how AI systems actually work, written by someone who builds with them in federal permitting."
+	title,
+	description = SITE_DEFAULT_DESCRIPTION,
+	ogImage = SITE_OG_IMAGE,
+	jsonLdExtra = [],
+	noindex = false
 } = Astro.props;
+
 const year = new Date().getFullYear();
 const path = Astro.url.pathname;
 const onHome = path === '/';
@@ -12,17 +39,68 @@ const onWho = path.startsWith('/who');
 const onWords = path.startsWith('/glossary');
 const onLessons = path.startsWith('/lessons');
 const onMemes = path.startsWith('/memes');
+
+const siteOrigin = (Astro.site ?? new URL('https://www.ai410.org')).origin;
+const canonicalURL = new URL(path, siteOrigin);
+const ogImageURL = absoluteUrl(ogImage, siteOrigin);
+
+const pageTitle =
+	title === SITE_NAME || title.endsWith(` · ${SITE_NAME}`) || title.includes('AI410')
+		? title
+		: `${title} · ${SITE_NAME}`;
+
+const schemaGraph = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		buildWebsiteSchema(siteOrigin, description),
+		buildPersonSchema(siteOrigin),
+		...jsonLdExtra
+	]
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{title}</title>
+  <title>{pageTitle}</title>
   <meta name="description" content={description} />
-  <meta name="author" content="Adler Archer" />
+  <meta name="author" content={SITE_PERSON_NAME} />
+  <meta name="keywords" content={SITE_KEYWORDS} />
+  <meta name="creator" content={SITE_PERSON_NAME} />
+  <meta name="publisher" content={`${SITE_NAME} by ${SITE_PERSON_NAME}`} />
+  {noindex ? (
+    <meta name="robots" content="noindex, nofollow" />
+  ) : (
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  )}
+  <link rel="canonical" href={canonicalURL.href} />
+  <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" title="Sitemap" />
   <link rel="icon" type="image/svg+xml" href="/images/ai410-mark.svg" />
-  <link rel="me" href="https://adlerarcher.com/" />
+  <link rel="apple-touch-icon" href="/images/ai410-mark.svg" />
+  <link rel="me" href={PERSON_PRIMARY_URL} />
+  <link rel="me" href="https://www.linkedin.com/in/adlerarcher" />
+  <link rel="author" href={`${siteOrigin}/who/`} />
+  <link rel="author" href={PERSON_PRIMARY_URL} />
+  <meta property="og:type" content={onWho ? 'profile' : 'website'} />
+  <meta property="og:site_name" content={SITE_NAME} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL.href} />
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:image:alt" content={`${SITE_NAME} — ${SITE_TAGLINE} by ${SITE_PERSON_NAME}`} />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageURL} />
+  <meta name="twitter:label1" content="Written by" />
+  <meta name="twitter:data1" content={SITE_PERSON_NAME} />
+  <meta name="twitter:label2" content="Topic" />
+  <meta name="twitter:data2" content="Artificial intelligence" />
+  {!noindex && (
+    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
+  )}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Caveat:wght@600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -30,7 +108,7 @@ const onMemes = path.startsWith('/memes');
 <body class:list={[onHome && 'home', onMemes && 'memes']}>
   <div class="wrap">
     <div class="topline">
-      <a class:list={['homechip', onHome && 'is-on']} href="/" aria-label="AI410 home">
+      <a class:list={['homechip', onHome && 'is-on']} href="/" aria-label="AI410 home — artificial intelligence by Adler Archer">
         <img src="/images/ai410-mark.svg" alt="" width="28" height="28" />
         ai410
       </a>
@@ -76,8 +154,11 @@ const onMemes = path.startsWith('/memes');
         <a href="/glossary/">Glossary</a>
         <a href="/memes/">Memes</a>
         <a href="/who/">Who wrote this</a>
+        <a href={PERSON_PRIMARY_URL} rel="me author">Adler Archer</a>
       </nav>
-      <p class="footer-copyright">© {year} Adler Archer. AI410.</p>
+      <p class="footer-copyright">
+        © {year} {SITE_PERSON_NAME}. {SITE_NAME} — plain-language artificial intelligence.
+      </p>
     </footer>
   </div>
 

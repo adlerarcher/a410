@@ -1,5 +1,11 @@
-# https://helloadler.com — Adler Archer gateway (GitHub Pages)
+# https://www.ai410.org — AI410 by Adler Archer
 User-agent: *
 Allow: /
 
-Sitemap: https://helloadler.com/sitemap-index.xml
+# Helpful for LLM / agent crawlers
+Allow: /llms.txt
+Allow: /lessons/
+Allow: /glossary/
+Allow: /who/
+
+Sitemap: https://www.ai410.org/sitemap-index.xml
