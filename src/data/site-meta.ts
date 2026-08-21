@@ -26,7 +26,7 @@ export const SITE_DEFAULT_DESCRIPTION =
 export const SITE_HOME_TITLE = 'How AI systems actually work, by Adler Archer';
 
 export const SITE_HOME_DESCRIPTION =
-	'Adler Archer explains artificial intelligence in plain language on AI410: what a model knows, what it can retrieve, what tools can do, and the difference between looking something up and acting.';
+	'Adler Archer explains artificial intelligence in plain language on AI410 for busy professionals: what a model knows, what it can retrieve, what tools can do, and the difference between looking something up and acting.';
 
 export const SITE_OG_IMAGE = '/images/ai410-mark.svg';
 
