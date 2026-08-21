@@ -25,24 +25,14 @@ export function buildPersonSchema(siteOrigin: string) {
 		alternateName: [SITE_PERSON_NAME_FULL, 'Adler Archer JD'],
 		url: PERSON_PRIMARY_URL,
 		sameAs: [...PERSON_SAME_AS],
-		jobTitle: [
-			'Presidential Innovation Fellow',
-			'Faculty, Johns Hopkins School of Medicine'
-		],
-		worksFor: {
-			'@type': 'Organization',
-			name: 'U.S. Department of Energy'
-		},
 		knowsAbout: [
 			'artificial intelligence',
 			'large language models',
 			'AI systems',
-			'federal permitting',
-			'energy technology',
-			'public service'
+			'plain-language AI education'
 		],
 		description:
-			'Adler Archer writes plain-language explanations of artificial intelligence and builds with AI systems in federal permitting work.'
+			'Adler Archer writes AI410 — plain-language explanations of how artificial intelligence systems actually work.'
 	};
 }
 

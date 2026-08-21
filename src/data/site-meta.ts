@@ -15,13 +15,13 @@ export const PERSON_PRIMARY_URL = 'https://adlerarcher.com/';
 export const PERSON_SAME_AS = [
 	'https://adlerarcher.com/',
 	'https://www.linkedin.com/in/adlerarcher',
-	'https://helloadler.com/',
+	'https://thermalunderground.org/',
 	'https://adlerarcherlab.org/',
 	'https://adloris.org/'
 ] as const;
 
 export const SITE_DEFAULT_DESCRIPTION =
-	'AI410 — plain-language artificial intelligence explanations by Adler Archer. How AI systems actually work: models, retrieval, tools, provenance, and agency, for adults who want clarity without jargon.';
+	'AI410 — plain-language artificial intelligence explanations by Adler Archer. How AI systems actually work: models, retrieval, tools, provenance, and agency.';
 
 export const SITE_HOME_TITLE = 'How AI systems actually work — by Adler Archer';
 
